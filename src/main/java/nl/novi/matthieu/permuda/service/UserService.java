@@ -14,17 +14,18 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    // constructor injection of repository
+    public UserService(UserRepository userRepository) {this.userRepository = userRepository;}
 
     public UserOutputDto addUser(UserInputDto userInputDto) {
+        // TODO : add exceptions
         User user = UserMapper.toEntity(userInputDto);
         this.userRepository.save(user);
         return UserMapper.toDto(user);
     }
 
     public List<UserOutputDto> getAllUsers() {
+        // TODO : add exceptions
         List<User> users = this.userRepository.findAll();
         return users.stream().map(UserMapper::toDto).toList();
     }

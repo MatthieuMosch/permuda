@@ -5,7 +5,7 @@ import java.net.URI;
 
 public class UriUtils {
 
-    public static URI createUri(String id) {
+    public static URI createUri(int id) {
         URI uri = URI.create(
                 ServletUriComponentsBuilder
                         .fromCurrentRequest().path("/" + id)
