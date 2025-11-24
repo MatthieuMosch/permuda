@@ -14,7 +14,7 @@ public class UserMapper {
         return user;
     }
 
-    public static UserOutputDto toDto(User user) {
+    public static UserOutputDto toOutputDto(User user) {
         UserOutputDto userOutputDto = new UserOutputDto();
         userOutputDto.id = user.getId();
         userOutputDto.username = user.getUsername();
