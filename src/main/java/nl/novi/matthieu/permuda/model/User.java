@@ -4,30 +4,31 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "users")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
     @Column(unique = true,  nullable = false,  length = 50)
-    @NotBlank(message = "Username is mandatory")
     private String username;
+
     @Column(nullable = false)
     private String password;
-    @Column(unique = true, nullable = false)
-    @NotBlank(message = "E-mail is mandatory")
-    @Email
-    private String email;
 
-    // getters (no password getter as it is secret)
-    public int getId() {return id;}
+    @ManyToOne
+    @JoinColumn(name = "rolename", referencedColumnName = "rolename")
+    private Role role;
+
+    // getters
     public String getUsername() {return username;}
-    public String getEmail() {return email;}
+    public String getPassword() {return password;}
+    public Role getRole() {return role;}
 
-    // setters (no id setter as this is done by the database)
+    // setters
     public void setUsername(String username) {this.username = username;}
     public void setPassword(String password) {this.password = password;}
-    public void setEmail(String email) {this.email = email;}
+    public void setRole(Role role) {this.role = role;}
 }

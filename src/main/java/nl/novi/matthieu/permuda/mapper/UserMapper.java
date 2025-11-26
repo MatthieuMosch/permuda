@@ -2,23 +2,34 @@ package nl.novi.matthieu.permuda.mapper;
 
 import nl.novi.matthieu.permuda.dto.UserInputDto;
 import nl.novi.matthieu.permuda.dto.UserOutputDto;
+import nl.novi.matthieu.permuda.model.Role;
 import nl.novi.matthieu.permuda.model.User;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class UserMapper {
+
+//    private static PasswordEncoder passwordEncoder;
+
+//    public UserMapper(PasswordEncoder injectedEncoder) {
+//        passwordEncoder = injectedEncoder;
+//    }
 
     public static User toEntity(UserInputDto userInputDto) {
         User user = new User();
         user.setUsername(userInputDto.username);
-        user.setPassword(userInputDto.password); // this should be encoded
-        user.setEmail(userInputDto.email);
+        // TODO : move the password encoding inside this mapper
+//        user.setPassword(passwordEncoder.encode(userInputDto.password));
+        // password is added in the user service
+//        user.setPassword(userInputDto.password);
+        // role is added in the user service
+//        user.setRole(userInputDto.role);
         return user;
     }
 
     public static UserOutputDto toOutputDto(User user) {
         UserOutputDto userOutputDto = new UserOutputDto();
-        userOutputDto.id = user.getId();
         userOutputDto.username = user.getUsername();
-        userOutputDto.email = user.getEmail();
+        userOutputDto.rolename = user.getRole().getRolename();
         return userOutputDto;
     }
 }

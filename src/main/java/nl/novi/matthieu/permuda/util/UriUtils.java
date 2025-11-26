@@ -5,10 +5,10 @@ import java.net.URI;
 
 public class UriUtils {
 
-    public static URI createUri(int id) {
+    public static URI createUri(String slug) {
         URI uri = URI.create(
                 ServletUriComponentsBuilder
-                        .fromCurrentRequest().path("/" + id)
+                        .fromCurrentRequest().path("/" + slug)
                         .toUriString());
         return uri;
     }

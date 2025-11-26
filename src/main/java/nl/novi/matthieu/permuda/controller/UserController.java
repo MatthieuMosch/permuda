@@ -24,7 +24,7 @@ public class UserController {
     @PostMapping
     public ResponseEntity<UserOutputDto> addUser(@Valid @RequestBody UserInputDto userInputDto) {
         UserOutputDto userOutputDto = this.userService.addUser(userInputDto);
-        URI uri = UriUtils.createUri(userOutputDto.id);
+        URI uri = UriUtils.createUri(userOutputDto.username);
         return ResponseEntity.created(uri).body(userOutputDto);
     }
 
@@ -34,17 +34,16 @@ public class UserController {
         return ResponseEntity.ok(this.userService.getAllUsers());
     }
 
-    // get 1 user by id
-    @GetMapping("/{id}")
-    public ResponseEntity<UserOutputDto> getUserById(@PathVariable int id) {
-        return ResponseEntity.ok(this.userService.getUserById(id));
+    // get 1 user
+    @GetMapping("/{username}")
+    public ResponseEntity<UserOutputDto> getUserById(@PathVariable String username) {
+        return ResponseEntity.ok(this.userService.getUserById(username));
     }
 
-    // delete 1 user by id
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUserById(@PathVariable int id) {
-        this.userService.deleteUserById(id);
+    // delete 1 user
+    @DeleteMapping("/{username}")
+    public ResponseEntity<Void> deleteUserById(@PathVariable String username) {
+        this.userService.deleteUserById(username);
         return ResponseEntity.noContent().build();
     }
-
 }
