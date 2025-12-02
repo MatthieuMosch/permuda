@@ -9,13 +9,13 @@ import java.util.Set;
 public class Role {
 
     @Id
+    @Column(unique = true, nullable = false)
     private String rolename;
 
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
     private Set<User> users;
 
-    // remove "ROLE_" from the rolename
-    public String getRolename() {return this.rolename.substring(5);}
-    // add "ROLE_" to the rolename
-    public void setRolename(String rolename) {this.rolename = "ROLE_" + rolename;}
+    // TODO : test wether all getters and setters ar required and used
+    public String getRolename() {return this.rolename;}
+    public void setRolename(String rolename) {this.rolename = rolename;}
 }

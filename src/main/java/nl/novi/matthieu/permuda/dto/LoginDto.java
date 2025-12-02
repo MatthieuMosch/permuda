@@ -5,8 +5,6 @@ import jakarta.validation.constraints.Size;
 
 public class LoginDto {
     // public properties as this is the login DTO which is public anyway
-    // UserInputDto inherits from LoginDto because they share the same fields
-    // so that the code can be changed in 1 location
 
     @NotBlank(message = "Username is required")
     @Size(message = "Username should be at least 3 characters long", min = 3)

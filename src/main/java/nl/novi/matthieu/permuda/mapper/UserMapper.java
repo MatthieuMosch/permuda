@@ -29,7 +29,8 @@ public class UserMapper {
     public static UserOutputDto toOutputDto(User user) {
         UserOutputDto userOutputDto = new UserOutputDto();
         userOutputDto.username = user.getUsername();
-        userOutputDto.rolename = user.getRole().getRolename();
+        // remove "ROLE_" from the rolemame before returning it to the user
+        userOutputDto.rolename = user.getRole().getRolename().substring(5);
         return userOutputDto;
     }
 }

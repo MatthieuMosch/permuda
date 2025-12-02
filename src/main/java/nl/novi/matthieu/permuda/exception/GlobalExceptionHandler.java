@@ -39,4 +39,8 @@ public class GlobalExceptionHandler {
 
     // TODO : catch invalid email exception (is now shown as 500 internal server error)
 
+    // TODO : catch empty list responses
+//    @ResponseStatus(HttpStatus.NO_CONTENT)
+//    @ExceptionHandler(EmptyListException.class)
+//    public void handleException() {}
 }

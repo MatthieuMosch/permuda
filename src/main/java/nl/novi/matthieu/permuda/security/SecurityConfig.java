@@ -3,6 +3,7 @@ package nl.novi.matthieu.permuda.security;
 import nl.novi.matthieu.permuda.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -44,22 +45,25 @@ public class SecurityConfig {
     public UserDetailsService userDetailsService() {return new MyUserDetailsService(this.userRepository);}
 
 
-    // Authorisation
+    // Authorization
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .sessionManagement( session ->
-                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll()) // TODO : remove, for testing purposes only
-//                        .requestMatchers(HttpMethod.POST, "/users").permitAll()
-//                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
-//                        .requestMatchers(HttpMethod.GET, "/users").hasRole("GOD")
-//                        .requestMatchers("/users").hasRole("USER")
-//                        .requestMatchers(HttpMethod.GET, "/rooms").permitAll()
-//                        .anyRequest().denyAll())
+                        .requestMatchers(HttpMethod.POST, "/users").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/users").hasRole("GOD")
+                        .anyRequest().denyAll())
+                .sessionManagement( session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .csrf(csrf -> csrf.disable())
                 .addFilterBefore(new JwtRequestFilter(jwtService, userDetailsService()), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 }
+
+//                        .anyRequest().permitAll()) // TODO : remove, for testing purposes only
+//                        .requestMatchers("/users").permitAll()
+//                        .requestMatchers(HttpMethod.GET, "/users").authenticated()
+
+////                        .requestMatchers("/users").hasRole("USER")
+////                        .requestMatchers(HttpMethod.GET, "/rooms").permitAll()

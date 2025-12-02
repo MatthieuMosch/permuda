@@ -30,12 +30,17 @@ public class UserService {
 
     public UserOutputDto addUser(UserInputDto userInputDto) {
         // TODO : add exception when username is not unique
+        // TODO : convert role input to uppercase
+        // TODO : endpointUtils met daarin addEndpoint en deleteEndpoint etc
+        // input en service doorgeven ... type object ?
+        // hierdoor elke vergelijkbare endpoint zelfde code en op 1 plaats wijzigen
+        // of de service methods in een helper class stoppen ?
+        // TODO : check for existing user, ignore upper and lower case
         User user = UserMapper.toEntity(userInputDto);
         user.setPassword(passwordEncoder.encode(userInputDto.password));
         // validate role input
         Role role = this.roleRepository.findById("ROLE_" + userInputDto.rolename)
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "Role " + userInputDto.rolename + " does not exist"));
+                .orElseThrow(() -> new ResourceNotFoundException("Role " + userInputDto.rolename + " does not exist"));
         // assign validated role to user
         user.setRole(role);
         this.userRepository.save(user);
@@ -43,15 +48,12 @@ public class UserService {
     }
 
     public List<UserOutputDto> getAllUsers() {
-        // TODO : throw exception when there is no user (empty array)
         List<User> users = this.userRepository.findAll();
         return users.stream().map(UserMapper::toOutputDto).toList();
     }
 
     public UserOutputDto getUserById(String username) {
-        // happy flow
         User user = this.userRepository.findById(username)
-        //unhappy flow
                 .orElseThrow(() -> new ResourceNotFoundException("User with username " + username + " does not exist"));
         return UserMapper.toOutputDto(user);
     }

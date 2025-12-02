@@ -1,11 +1,6 @@
 package nl.novi.matthieu.permuda.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -21,6 +16,10 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "rolename", referencedColumnName = "rolename")
     private Role role;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Profile profile;
+
 
     // getters
     public String getUsername() {return username;}
