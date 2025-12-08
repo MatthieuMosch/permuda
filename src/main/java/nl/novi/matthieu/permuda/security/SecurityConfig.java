@@ -9,7 +9,6 @@ import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -44,19 +43,36 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService() {return new MyUserDetailsService(this.userRepository);}
 
-
     // Authorization
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/users").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/users").hasRole("GOD")
-                        .anyRequest().denyAll())
-                .sessionManagement( session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .sessionManagement( session ->
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .csrf(csrf -> csrf.disable())
-                .addFilterBefore(new JwtRequestFilter(jwtService, userDetailsService()), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(
+                        new JwtRequestFilter(jwtService, userDetailsService()), UsernamePasswordAuthenticationFilter.class)
+                .authorizeHttpRequests(auth -> auth
+                        // login
+                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                        // user management
+                        .requestMatchers(HttpMethod.GET, "/roles").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/users").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/profiles").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/users").hasRole("GOD")
+                        // mud creation
+                        .requestMatchers(HttpMethod.POST,
+                                "/achievements",
+                                "/actions",
+                                "/creatures",
+                                "/rooms").hasAnyRole("GOD","WIZARD")
+                        // mud use by everyone who is logged in: PLAYER or WIZARD or GOD
+                        .requestMatchers(HttpMethod.GET,
+                                "/achievements",
+                                "/actions",
+                                "creatures",
+                                "/rooms").authenticated()
+                        .anyRequest().denyAll());
         return http.build();
     }
 }
@@ -64,6 +80,3 @@ public class SecurityConfig {
 //                        .anyRequest().permitAll()) // TODO : remove, for testing purposes only
 //                        .requestMatchers("/users").permitAll()
 //                        .requestMatchers(HttpMethod.GET, "/users").authenticated()
-
-////                        .requestMatchers("/users").hasRole("USER")
-////                        .requestMatchers(HttpMethod.GET, "/rooms").permitAll()

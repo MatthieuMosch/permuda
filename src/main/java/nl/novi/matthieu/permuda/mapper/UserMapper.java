@@ -1,10 +1,8 @@
 package nl.novi.matthieu.permuda.mapper;
 
-import nl.novi.matthieu.permuda.dto.UserInputDto;
-import nl.novi.matthieu.permuda.dto.UserOutputDto;
-import nl.novi.matthieu.permuda.model.Role;
+import nl.novi.matthieu.permuda.dto.User.UserInputDto;
+import nl.novi.matthieu.permuda.dto.User.UserOutputDto;
 import nl.novi.matthieu.permuda.model.User;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class UserMapper {
 

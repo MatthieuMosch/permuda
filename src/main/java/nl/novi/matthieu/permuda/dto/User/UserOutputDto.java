@@ -1,4 +1,4 @@
-package nl.novi.matthieu.permuda.dto;
+package nl.novi.matthieu.permuda.dto.User;
 
 public class UserOutputDto {
     // public properties as this is the output DTO which is public anyway

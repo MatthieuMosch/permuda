@@ -1,9 +1,7 @@
 package nl.novi.matthieu.permuda.controller;
 
 import jakarta.validation.Valid;
-import nl.novi.matthieu.permuda.dto.LoginDto;
-import nl.novi.matthieu.permuda.dto.UserInputDto;
-import nl.novi.matthieu.permuda.dto.UserOutputDto;
+import nl.novi.matthieu.permuda.dto.User.LoginDto;
 import nl.novi.matthieu.permuda.security.JwtService;
 import nl.novi.matthieu.permuda.service.LoginService;
 import org.springframework.http.HttpHeaders;
@@ -38,6 +36,7 @@ public class LoginController {
     @PostMapping
     public ResponseEntity<Object> login(@Valid @RequestBody LoginDto loginDto) {
         // TODO : test exceptions
+        // TODO : move logica to service
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginDto.username, loginDto.password);
         try {

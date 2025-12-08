@@ -1,7 +1,7 @@
 package nl.novi.matthieu.permuda.service;
 
-import nl.novi.matthieu.permuda.dto.UserInputDto;
-import nl.novi.matthieu.permuda.dto.UserOutputDto;
+import nl.novi.matthieu.permuda.dto.User.UserInputDto;
+import nl.novi.matthieu.permuda.dto.User.UserOutputDto;
 import nl.novi.matthieu.permuda.exception.ResourceNotFoundException;
 import nl.novi.matthieu.permuda.mapper.UserMapper;
 import nl.novi.matthieu.permuda.model.Role;

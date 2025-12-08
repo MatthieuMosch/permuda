@@ -1,7 +1,6 @@
-package nl.novi.matthieu.permuda.dto;
+package nl.novi.matthieu.permuda.dto.User;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 
 public class UserInputDto extends LoginDto {
     // public properties as this is the input DTO which is public anyway
