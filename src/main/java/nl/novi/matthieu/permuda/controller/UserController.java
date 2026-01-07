@@ -53,11 +53,11 @@ public class UserController {
         return ResponseEntity.ok(this.service.getAllUsers());
     }
 
-//    // get 1 user
-//    @GetMapping("/{username}")
-//    public ResponseEntity<UserOutputDto> getUserById(@PathVariable String username) {
-//        return ResponseEntity.ok(this.userService.getUserById(username));
-//    }
+    // get 1 user
+    @GetMapping("/{username}")
+    public ResponseEntity<UserOutputDto> getUserById(@PathVariable String username) {
+        return ResponseEntity.ok(this.service.getUserByUsername(username));
+    }
 
 //    // delete 1 user
     @DeleteMapping("/{username}")

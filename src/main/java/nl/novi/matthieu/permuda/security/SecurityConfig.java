@@ -60,23 +60,21 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/users").permitAll()
                         .requestMatchers(HttpMethod.POST, "/profiles").authenticated()
                         .requestMatchers(HttpMethod.GET, "/users").hasRole("GOD")
+                        .requestMatchers(HttpMethod.GET, "/users/*").authenticated()
                         // mud creation
                         .requestMatchers(HttpMethod.POST,
                                 "/achievements",
                                 "/actions",
                                 "/creatures",
                                 "/rooms").hasAnyRole("GOD","WIZARD")
-                        // mud use by everyone who is logged in: PLAYER or WIZARD or GOD
+                        // mud use per single entry by everyone who is logged in: PLAYER or WIZARD or GOD
                         .requestMatchers(HttpMethod.GET,
-                                "/achievements",
-                                "/actions",
-                                "creatures",
-                                "/rooms").authenticated()
+                                "/achievements/*",
+                                "/actions/*",
+                                "/creatures/*",
+                                "/rooms/*").authenticated()
+                        // deny any other unresolved request
                         .anyRequest().denyAll());
         return http.build();
     }
 }
-
-//                        .anyRequest().permitAll()) // TODO : remove, for testing purposes only
-//                        .requestMatchers("/users").permitAll()
-//                        .requestMatchers(HttpMethod.GET, "/users").authenticated()

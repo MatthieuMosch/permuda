@@ -37,7 +37,7 @@ public class JwtService {
     public Boolean isTokenExpired(String token) {return extractExpiration(token).before(new Date());}
 
     public String createToken(Map<String, Object> claims, String subject) {
-        long valid = 1000 * 60 * 60 * 24 * 10;
+        long valid = 1000 * 60 * 60 * 24 * 7;
         long now = System.currentTimeMillis();
         return Jwts.builder()
                 .setClaims(claims)

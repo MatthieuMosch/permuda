@@ -3,9 +3,7 @@ package nl.novi.matthieu.permuda.controller;
 import nl.novi.matthieu.permuda.dto.Room.RoomOutputDto;
 import nl.novi.matthieu.permuda.service.RoomService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,5 +18,10 @@ public class RoomController {
     @GetMapping
     public ResponseEntity<List<RoomOutputDto>> getAllRooms() {
         return ResponseEntity.ok(this.service.getAllRooms());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<RoomOutputDto> getRoomById(@PathVariable String id) {
+        return ResponseEntity.ok(this.service.getRoomById(id));
     }
 }

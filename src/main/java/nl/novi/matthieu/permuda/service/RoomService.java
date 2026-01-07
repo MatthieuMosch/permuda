@@ -19,4 +19,10 @@ public class RoomService {
         List<Room> rooms = this.repository.findAll();
         return rooms.stream().map(RoomMapper::toOutputDto).toList();
     }
+
+    public  RoomOutputDto getRoomById(String id) {
+        // TODO : test this with non-numeric requestparam
+        Room room = this.repository.findRoomById(Long.parseLong(id));
+        return RoomMapper.toOutputDto(room);
+    }
 }

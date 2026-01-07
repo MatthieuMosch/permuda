@@ -29,13 +29,11 @@ public class UserService {
     }
 
     public UserOutputDto addUser(UserInputDto userInputDto) {
+        // TODO : check for existing user, ignore upper and lower case
         // TODO : add exception when username is not unique
         // TODO : convert role input to uppercase
-        // TODO : endpointUtils met daarin addEndpoint en deleteEndpoint etc
-        // input en service doorgeven ... type object ?
-        // hierdoor elke vergelijkbare endpoint zelfde code en op 1 plaats wijzigen
-        // of de service methods in een helper class stoppen ?
-        // TODO : check for existing user, ignore upper and lower case
+        // TODO : endpointUtils with addEndpoint and deleteEndpoint etc for every endpoint the same
+        // TODO : only GOD can assign roles other than PLAYER
         User user = UserMapper.toEntity(userInputDto);
         user.setPassword(passwordEncoder.encode(userInputDto.password));
         // validate role input
@@ -52,8 +50,8 @@ public class UserService {
         return users.stream().map(UserMapper::toOutputDto).toList();
     }
 
-    public UserOutputDto getUserById(String username) {
-        User user = this.userRepository.findById(username)
+    public UserOutputDto getUserByUsername(String username) {
+        User user = this.userRepository.findByUsernameIgnoreCase(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User with username " + username + " does not exist"));
         return UserMapper.toOutputDto(user);
     }
