@@ -1,6 +1,4 @@
-package nl.novi.matthieu.permuda.dto;
-
-import nl.novi.matthieu.permuda.model.Role;
+package nl.novi.matthieu.permuda.dto.User;
 
 public class UserOutputDto {
     // public properties as this is the output DTO which is public anyway

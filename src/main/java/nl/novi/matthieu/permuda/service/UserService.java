@@ -1,7 +1,7 @@
 package nl.novi.matthieu.permuda.service;
 
-import nl.novi.matthieu.permuda.dto.UserInputDto;
-import nl.novi.matthieu.permuda.dto.UserOutputDto;
+import nl.novi.matthieu.permuda.dto.User.UserInputDto;
+import nl.novi.matthieu.permuda.dto.User.UserOutputDto;
 import nl.novi.matthieu.permuda.exception.ResourceNotFoundException;
 import nl.novi.matthieu.permuda.mapper.UserMapper;
 import nl.novi.matthieu.permuda.model.Role;
@@ -29,13 +29,16 @@ public class UserService {
     }
 
     public UserOutputDto addUser(UserInputDto userInputDto) {
+        // TODO : check for existing user, ignore upper and lower case
         // TODO : add exception when username is not unique
+        // TODO : convert role input to uppercase
+        // TODO : endpointUtils with addEndpoint and deleteEndpoint etc for every endpoint the same
+        // TODO : only GOD can assign roles other than PLAYER
         User user = UserMapper.toEntity(userInputDto);
         user.setPassword(passwordEncoder.encode(userInputDto.password));
         // validate role input
         Role role = this.roleRepository.findById("ROLE_" + userInputDto.rolename)
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "Role " + userInputDto.rolename + " does not exist"));
+                .orElseThrow(() -> new ResourceNotFoundException("Role " + userInputDto.rolename + " does not exist"));
         // assign validated role to user
         user.setRole(role);
         this.userRepository.save(user);
@@ -43,15 +46,12 @@ public class UserService {
     }
 
     public List<UserOutputDto> getAllUsers() {
-        // TODO : throw exception when there is no user (empty array)
         List<User> users = this.userRepository.findAll();
         return users.stream().map(UserMapper::toOutputDto).toList();
     }
 
-    public UserOutputDto getUserById(String username) {
-        // happy flow
-        User user = this.userRepository.findById(username)
-        //unhappy flow
+    public UserOutputDto getUserByUsername(String username) {
+        User user = this.userRepository.findByUsernameIgnoreCase(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User with username " + username + " does not exist"));
         return UserMapper.toOutputDto(user);
     }
