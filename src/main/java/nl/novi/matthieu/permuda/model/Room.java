@@ -9,6 +9,7 @@ public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private long x;
     private long y;
     private long z;
@@ -26,6 +27,7 @@ public class Room {
     public String getDescription() {return description;}
     public Profile getProfile() {return profile;}
 
+    // setters
     public void setX(long x) {this.x = x;}
     public void setY(long y) {this.y = y;}
     public void setZ(long z) {this.z = z;}

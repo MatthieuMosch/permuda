@@ -55,12 +55,16 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // login
                         .requestMatchers(HttpMethod.POST, "/login").permitAll()
-                        // user management
+                        // users and profiles
                         .requestMatchers(HttpMethod.GET, "/roles").permitAll()
                         .requestMatchers(HttpMethod.POST, "/users").permitAll()
                         .requestMatchers(HttpMethod.POST, "/profiles").authenticated()
-                        .requestMatchers(HttpMethod.GET, "/users").hasRole("GOD")
-                        .requestMatchers(HttpMethod.GET, "/users/*").authenticated()
+                        .requestMatchers(HttpMethod.GET,
+                                "/users",
+                                "/profiles").hasRole("GOD")
+                        .requestMatchers(HttpMethod.GET,
+                                "/users/*",
+                                "/profiles/*").authenticated()
                         // mud creation
                         .requestMatchers(HttpMethod.POST,
                                 "/achievements",
