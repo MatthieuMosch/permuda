@@ -2,6 +2,8 @@ package nl.novi.matthieu.permuda.model;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "rooms")
 public class Room {
@@ -10,27 +12,28 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private long x;
-    private long y;
-    private long z;
+    @Column(nullable = false)
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "owner", referencedColumnName = "username")
+    @JoinColumn(name = "profile_id", referencedColumnName = "id")
     private Profile profile;
+
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
+    private Set<Action> actions;
+
+    @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL)
+    private Set<Action> origins;
+
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
+    private Set<Creature> creatures;
 
     // getters
     public long getId() {return id;}
-    public long getX() {return x;}
-    public long getY() {return y;}
-    public long getZ() {return z;}
     public String getDescription() {return description;}
     public Profile getProfile() {return profile;}
 
     // setters
-    public void setX(long x) {this.x = x;}
-    public void setY(long y) {this.y = y;}
-    public void setZ(long z) {this.z = z;}
     public void setDescription(String description) {this.description = description;}
     public void setProfile(Profile profile) {this.profile = profile;}
 

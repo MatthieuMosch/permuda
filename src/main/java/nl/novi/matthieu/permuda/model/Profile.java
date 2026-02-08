@@ -12,14 +12,9 @@ public class Profile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-
-    // https://stackoverflow.com/questions/77129076/entity-does-not-define-an-idclass
-    // https://thorben-janssen.com/hibernate-tips-same-primary-key-one-to-one-association/
     @OneToOne
-    @MapsId("userID")
-    @JoinColumn(name = "username", referencedColumnName = "username")
+    @JoinColumn(name = "username")
     private User user;
-    private Long userId;
 
     private String firstname;
     private String lastname;
@@ -27,11 +22,20 @@ public class Profile {
     private String picture;
     private String bio;
 
+    @ManyToMany
+    @JoinTable(
+            name = "profiles_achievements",
+            joinColumns = @JoinColumn(name = "profile_id"),
+            inverseJoinColumns = @JoinColumn(name = "title")
+    )
+    private Set<Achievement> achievements;
+
     @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
     private Set<Room> rooms;
 
+    // TODO : use this. in all getters and setters
     // getters
-    public Long getUserId() {return this.userId;}
+    public Long getId() {return this.id;}
     public User getUser() {return this.user;}
     public String getUsername() {return this.user.getUsername();}
     public String getFirstname() {return this.firstname;}
@@ -42,7 +46,7 @@ public class Profile {
     public Set<Room> getRooms() {return this.rooms;}
 
     // setters
-    public void setUserId(Long userId) {this.userId = userId;}
+    public void setId(Long userId) {this.id = userId;}
     public void setUser(User user) {this.user = user;}
     public void setFirstname(String firstname) {this.firstname = firstname;}
     public void setLastname(String lastname) {this.lastname = lastname;}

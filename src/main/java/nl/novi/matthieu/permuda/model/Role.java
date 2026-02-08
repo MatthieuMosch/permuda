@@ -9,10 +9,6 @@ import java.util.Set;
 public class Role {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    // TODO : use an enum for this
     private String rolename;
 
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)

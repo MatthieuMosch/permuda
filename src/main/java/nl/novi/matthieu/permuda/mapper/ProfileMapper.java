@@ -12,7 +12,7 @@ public class ProfileMapper {
 
     public static Profile toEntity(ProfileInputDto profileInputDto) {
         Profile profile = new Profile();
-        profile.setUserId(profileInputDto.userId);
+        profile.setId(profileInputDto.userId);
         profile.setFirstname(profileInputDto.firstname);
         profile.setLastname(profileInputDto.lastname);
         profile.setEmail(profileInputDto.email);
@@ -23,7 +23,7 @@ public class ProfileMapper {
 
     public static ProfileOutputDto toDto(Profile profile) {
         ProfileOutputDto profileOutputDto = new ProfileOutputDto();
-        profileOutputDto.userId = profile.getUserId();
+        profileOutputDto.userId = profile.getId();
         profileOutputDto.username = profile.getUsername();
         profileOutputDto.firstname = profile.getFirstname();
         profileOutputDto.lastname = profile.getLastname();
