@@ -8,9 +8,6 @@ public class RoomMapper {
 
     public static Room toEntity(RoomInputDto roomInputDto) {
         Room room = new Room();
-        room.setX(roomInputDto.x);
-        room.setY(roomInputDto.y);
-        room.setZ(roomInputDto.z);
         room.setDescription(roomInputDto.description);
         return room;
     }
@@ -18,11 +15,8 @@ public class RoomMapper {
     public static RoomOutputDto toOutputDto(Room room) {
         RoomOutputDto roomOutputDto = new RoomOutputDto();
         roomOutputDto.id = room.getId();
-        roomOutputDto.x = room.getX();
-        roomOutputDto.y = room.getY();
-        roomOutputDto.z = room.getZ();
         roomOutputDto.description = room.getDescription();
-        roomOutputDto.owner = room.getProfile().getUser().getUsername();
+        roomOutputDto.owner = room.getOwner().getUser().getUsername();
         return roomOutputDto;
     }
 }

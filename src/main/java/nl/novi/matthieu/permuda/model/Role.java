@@ -9,7 +9,6 @@ import java.util.Set;
 public class Role {
 
     @Id
-    @Column(unique = true, nullable = false)
     private String rolename;
 
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)

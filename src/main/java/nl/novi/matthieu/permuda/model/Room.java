@@ -2,6 +2,8 @@ package nl.novi.matthieu.permuda.model;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "rooms")
 public class Room {
@@ -9,27 +11,33 @@ public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private long x;
-    private long y;
-    private long z;
+
+    @Column(nullable = false)
     private String description;
+
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
+    private Set<Profile> profiles;
+
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
+    private Set<Creature> creatures;
+
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
+    private Set<Action> actions;
+
+    @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL)
+    private Set<Action> origins;
 
     @ManyToOne
     @JoinColumn(name = "owner", referencedColumnName = "username")
-    private Profile profile;
+    private Profile owner;
 
     // getters
     public long getId() {return id;}
-    public long getX() {return x;}
-    public long getY() {return y;}
-    public long getZ() {return z;}
     public String getDescription() {return description;}
-    public Profile getProfile() {return profile;}
+    public Profile getOwner() {return owner;}
 
-    public void setX(long x) {this.x = x;}
-    public void setY(long y) {this.y = y;}
-    public void setZ(long z) {this.z = z;}
+    // setters
     public void setDescription(String description) {this.description = description;}
-    public void setProfile(Profile profile) {this.profile = profile;}
+    public void setOwner(Profile owner) {this.owner = owner;}
 
 }
