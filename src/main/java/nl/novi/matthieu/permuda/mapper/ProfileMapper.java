@@ -30,7 +30,7 @@ public class ProfileMapper {
         profileOutputDto.email = profile.getEmail();
         profileOutputDto.picture = profile.getPicture();
         profileOutputDto.bio = profile.getBio();
-        profileOutputDto.rooms = profile.getRooms();
+        profileOutputDto.rooms = profile.getOwnedRooms();
         return profileOutputDto;
     }
 }

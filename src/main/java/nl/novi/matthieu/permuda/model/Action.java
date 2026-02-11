@@ -9,19 +9,19 @@ public class Action {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
-    private String command;
-
-    private String succes;
-    private String fail;
-
     @ManyToOne
     @JoinColumn(name = "room_id", referencedColumnName = "id")
     private Room room;
 
+    @Column(nullable = false)
+    private String command;
+
     @ManyToOne
     @JoinColumn(name = "requirement", referencedColumnName = "title")
     private Achievement requirement;
+
+    private String succes;
+    private String fail;
 
     @ManyToOne
     @JoinColumn(name = "reward", referencedColumnName = "title")
@@ -30,4 +30,8 @@ public class Action {
     @ManyToOne
     @JoinColumn(name = "destination", referencedColumnName = "id")
     private Room destination;
+
+    @ManyToOne
+    @JoinColumn(name = "owner", referencedColumnName = "username")
+    private Profile owner;
 }

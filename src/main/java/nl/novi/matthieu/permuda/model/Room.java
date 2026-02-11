@@ -15,9 +15,11 @@ public class Room {
     @Column(nullable = false)
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "profile_id", referencedColumnName = "id")
-    private Profile profile;
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
+    private Set<Profile> profiles;
+
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
+    private Set<Creature> creatures;
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     private Set<Action> actions;
@@ -25,16 +27,17 @@ public class Room {
     @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL)
     private Set<Action> origins;
 
-    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
-    private Set<Creature> creatures;
+    @ManyToOne
+    @JoinColumn(name = "owner", referencedColumnName = "username")
+    private Profile owner;
 
     // getters
     public long getId() {return id;}
     public String getDescription() {return description;}
-    public Profile getProfile() {return profile;}
+    public Profile getOwner() {return owner;}
 
     // setters
     public void setDescription(String description) {this.description = description;}
-    public void setProfile(Profile profile) {this.profile = profile;}
+    public void setOwner(Profile owner) {this.owner = owner;}
 
 }

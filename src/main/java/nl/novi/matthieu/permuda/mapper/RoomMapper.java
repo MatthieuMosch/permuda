@@ -16,7 +16,7 @@ public class RoomMapper {
         RoomOutputDto roomOutputDto = new RoomOutputDto();
         roomOutputDto.id = room.getId();
         roomOutputDto.description = room.getDescription();
-        roomOutputDto.owner = room.getProfile().getUser().getUsername();
+        roomOutputDto.owner = room.getOwner().getUser().getUsername();
         return roomOutputDto;
     }
 }

@@ -14,13 +14,15 @@ public class Achievement {
     @ManyToMany(mappedBy = "achievements")
     private Set<Profile> profiles;
 
-    // TODO : test this by adding data with various actions and requirements and rewards
     @OneToMany(mappedBy = "requirement", cascade = CascadeType.ALL)
     private Set<Action> requirements;
 
-    // TODO : test this by adding data with various actions and requirements and rewards
     @OneToMany(mappedBy = "reward", cascade = CascadeType.ALL)
     private Set<Action> rewards;
+
+    @ManyToOne
+    @JoinColumn(name = "owner", referencedColumnName = "username")
+    private Profile owner;
 
     // getters
     public String getTitle() {return this.title;}

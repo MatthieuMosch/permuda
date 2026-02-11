@@ -10,12 +10,12 @@ public class User {
     @Column(unique = true,  nullable = false,  length = 50)
     private String username;
 
-    @Column(nullable = false)
-    private String password;
-
     @ManyToOne
     @JoinColumn(name = "rolename", referencedColumnName = "rolename")
     private Role role;
+
+    @Column(nullable = false)
+    private String password;
 
     @OneToOne(mappedBy = "user")
     private Profile profile;
