@@ -27,10 +27,14 @@ public class Achievement {
     // getters
     public String getTitle() {return this.title;}
     public void setProfiles(Set<Profile> profiles) {this.profiles = profiles;}
+    public Set<Action> getRequirements() {return this.requirements;}
+    public Set<Action> getRewards() {return this.rewards;}
+    public Profile getOwner() {return this.owner;}
 
     // setters
     public void setTitle(String title) {this.title = title;}
     public Set<Profile> getProfiles() {return this.profiles;}
-
-
+    public void setRequirements(Set<Action> requirements) {this.requirements = requirements;}
+    public void setRewards(Set<Action> rewards) {this.rewards = rewards;}
+    public void setOwner(Profile owner) {this.owner = owner;}
 }

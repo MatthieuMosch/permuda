@@ -14,7 +14,11 @@ public class Role {
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
     private Set<User> users;
 
-    // TODO : test wether all getters and setters ar required and used
+    // getters
     public String getRolename() {return this.rolename;}
+    public Set<User> getUsers() {return this.users;}
+
+    // setters
     public void setRolename(String rolename) {this.rolename = rolename;}
+    public void setUsers(Set<User> users) {this.users = users;}
 }
