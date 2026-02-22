@@ -1,12 +1,42 @@
 package nl.novi.matthieu.permuda.service;
 
-import nl.novi.matthieu.permuda.repository.ActionRepository;
+import nl.novi.matthieu.permuda.dto.action.ActionInputDto;
+import nl.novi.matthieu.permuda.dto.action.ActionOutputDto;
+import nl.novi.matthieu.permuda.mapper.ActionMapper;
+import nl.novi.matthieu.permuda.model.Action;
+import nl.novi.matthieu.permuda.repository.*;
+import nl.novi.matthieu.permuda.util.UserUtils;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ActionService {
 
-    private final ActionRepository repository;
+    private final AchievementRepository achievementRepository;
+    private final ActionRepository actionRepository;
+    private final ProfileRepository profileRepository;
+    private final RoomRepository roomRepository;
+    private final UserRepository userRepository;
 
-    public ActionService(ActionRepository repository) {this.repository = repository;}
+    public ActionService(AchievementRepository achievementRepository,
+                         ActionRepository actionRepository,
+                         ProfileRepository profileRepository,
+                         RoomRepository roomRepository,
+                         UserRepository userRepository) {
+        this.achievementRepository = achievementRepository;
+        this.actionRepository = actionRepository;
+        this.profileRepository = profileRepository;
+        this.roomRepository = roomRepository;
+        this.userRepository = userRepository;
+    }
+
+    public ActionOutputDto addAction(ActionInputDto actionInputDto, String username) {
+        Action action = ActionMapper.toEntity(actionInputDto);
+        action.setRoom(this.roomRepository.findRoomById(actionInputDto.room_id));
+        action.setRequirement(this.achievementRepository.findAchievementByTitle(actionInputDto.requirement_title));
+        action.setReward(this.achievementRepository.findAchievementByTitle(actionInputDto.reward_title));
+        action.setDestination(this.roomRepository.findRoomById(actionInputDto.destination_id));
+        action.setOwner(UserUtils.createOwnerProfile(this.userRepository,this.profileRepository,username));
+        this.actionRepository.save(action);
+        return ActionMapper.toOutputDto(action);
+    }
 }

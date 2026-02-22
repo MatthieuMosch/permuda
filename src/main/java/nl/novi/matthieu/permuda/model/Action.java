@@ -17,22 +17,22 @@ public class Action {
     private String command;
 
     @ManyToOne
-    @JoinColumn(name = "requirement", referencedColumnName = "title")
+    @JoinColumn(name = "requirement_title", referencedColumnName = "title")
     private Achievement requirement;
 
     private String succes;
     private String fail;
 
     @ManyToOne
-    @JoinColumn(name = "reward", referencedColumnName = "title")
+    @JoinColumn(name = "reward_title", referencedColumnName = "title")
     private Achievement reward;
 
     @ManyToOne
-    @JoinColumn(name = "destination", referencedColumnName = "id")
+    @JoinColumn(name = "destination_id", referencedColumnName = "id")
     private Room destination;
 
     @ManyToOne
-    @JoinColumn(name = "owner", referencedColumnName = "username")
+    @JoinColumn(name = "owner_name", referencedColumnName = "username")
     private Profile owner;
 
     public long getId() {return this.id;}

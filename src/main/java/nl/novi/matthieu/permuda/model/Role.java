@@ -11,7 +11,7 @@ public class Role {
     @Id
     private String rolename;
 
-    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<User> users;
 
     // getters

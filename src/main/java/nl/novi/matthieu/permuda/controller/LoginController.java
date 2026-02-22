@@ -1,7 +1,7 @@
 package nl.novi.matthieu.permuda.controller;
 
 import jakarta.validation.Valid;
-import nl.novi.matthieu.permuda.dto.User.LoginDto;
+import nl.novi.matthieu.permuda.dto.user.LoginDto;
 import nl.novi.matthieu.permuda.service.LoginService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -30,7 +30,6 @@ public class LoginController {
             return ResponseEntity.ok()
                     .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwt)
                     .body("JWT in header");
-
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
         }

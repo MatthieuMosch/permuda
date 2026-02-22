@@ -1,8 +1,8 @@
 package nl.novi.matthieu.permuda.controller;
 
 import jakarta.validation.Valid;
-import nl.novi.matthieu.permuda.dto.User.UserInputDto;
-import nl.novi.matthieu.permuda.dto.User.UserOutputDto;
+import nl.novi.matthieu.permuda.dto.user.UserInputDto;
+import nl.novi.matthieu.permuda.dto.user.UserOutputDto;
 import nl.novi.matthieu.permuda.service.UserService;
 import nl.novi.matthieu.permuda.util.UriUtils;
 import org.springframework.http.ResponseEntity;

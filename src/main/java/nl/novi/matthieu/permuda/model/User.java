@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class User {
 
     @Id
-    @Column(unique = true,  nullable = false,  length = 50)
+    @Column(length = 50)
     private String username;
 
     @ManyToOne
@@ -17,7 +17,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Profile profile;
 
     // getters

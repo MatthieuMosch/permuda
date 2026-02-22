@@ -21,14 +21,14 @@ public class Room {
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     private Set<Creature> creatures;
 
-    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "room")
     private Set<Action> actions;
 
     @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL)
     private Set<Action> origins;
 
     @ManyToOne
-    @JoinColumn(name = "owner", referencedColumnName = "username")
+    @JoinColumn(name = "owner_name", referencedColumnName = "username")
     private Profile owner;
 
     // getters

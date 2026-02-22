@@ -1,4 +1,4 @@
-package nl.novi.matthieu.permuda.dto.User;
+package nl.novi.matthieu.permuda.dto.user;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

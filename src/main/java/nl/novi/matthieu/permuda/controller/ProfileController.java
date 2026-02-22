@@ -1,7 +1,7 @@
 package nl.novi.matthieu.permuda.controller;
 
-import nl.novi.matthieu.permuda.dto.User.ProfileInputDto;
-import nl.novi.matthieu.permuda.dto.User.ProfileOutputDto;
+import nl.novi.matthieu.permuda.dto.user.ProfileInputDto;
+import nl.novi.matthieu.permuda.dto.user.ProfileOutputDto;
 import nl.novi.matthieu.permuda.service.ProfileService;
 import nl.novi.matthieu.permuda.util.UriUtils;
 import org.springframework.http.ResponseEntity;

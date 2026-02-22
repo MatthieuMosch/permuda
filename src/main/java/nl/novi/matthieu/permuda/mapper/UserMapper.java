@@ -1,7 +1,7 @@
 package nl.novi.matthieu.permuda.mapper;
 
-import nl.novi.matthieu.permuda.dto.User.UserInputDto;
-import nl.novi.matthieu.permuda.dto.User.UserOutputDto;
+import nl.novi.matthieu.permuda.dto.user.UserInputDto;
+import nl.novi.matthieu.permuda.dto.user.UserOutputDto;
 import nl.novi.matthieu.permuda.model.User;
 
 public class UserMapper {

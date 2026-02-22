@@ -1,4 +1,4 @@
-package nl.novi.matthieu.permuda.dto.User;
+package nl.novi.matthieu.permuda.dto.user;
 
 import nl.novi.matthieu.permuda.model.Room;
 
