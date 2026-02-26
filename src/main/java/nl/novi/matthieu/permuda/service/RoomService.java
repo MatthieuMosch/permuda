@@ -35,7 +35,13 @@ public class RoomService {
         return RoomMapper.toOutputDto(room);
     }
 
+    public void deleteRoom(long id) {
+        // TODO : check if id exists
+        this.roomRepository.deleteById(id);
+    }
+
     public List<RoomOutputDto> getAllRooms() {
+        // TODO : only GOD can get it all
         List<Room> rooms = this.roomRepository.findAll();
         return rooms.stream().map(RoomMapper::toOutputDto).toList();
     }

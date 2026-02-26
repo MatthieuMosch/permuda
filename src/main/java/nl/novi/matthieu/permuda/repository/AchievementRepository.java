@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AchievementRepository extends JpaRepository<Achievement, Long> {
     Achievement findAchievementByTitle(String title);
+    void deleteByTitle(String title);
 }

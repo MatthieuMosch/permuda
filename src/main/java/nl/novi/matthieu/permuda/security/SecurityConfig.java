@@ -61,22 +61,29 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/profiles").authenticated()
                         .requestMatchers(HttpMethod.GET,
                                 "/users",
-                                "/profiles").hasRole("GOD")
+                                "/profiles",
+                                "/rooms").hasRole("GOD")
                         .requestMatchers(HttpMethod.GET,
                                 "/users/*",
                                 "/profiles/*").authenticated()
-                        // mud creation
-                        .requestMatchers(HttpMethod.POST,
-                                "/achievements",
-                                "/actions",
-                                "/creatures",
-                                "/rooms").hasAnyRole("GOD","WIZARD")
                         // mud use per single entry by everyone who is logged in: PLAYER or WIZARD or GOD
                         .requestMatchers(HttpMethod.GET,
                                 "/achievements/*",
                                 "/actions/*",
                                 "/creatures/*",
                                 "/rooms/*").authenticated()
+                        // mud creation
+                        .requestMatchers(HttpMethod.POST,
+                                "/achievements",
+                                "/actions",
+                                "/creatures",
+                                "/rooms").hasAnyRole("GOD","WIZARD")
+                        // deletion
+                        .requestMatchers(HttpMethod.DELETE,
+                                "/achievements/*",
+                                "/actions/*",
+                                "/creatures/*",
+                                "/rooms/*").hasAnyRole("GOD","WIZARD")
                         // deny any other unresolved request
                         .anyRequest().denyAll());
         return http.build();

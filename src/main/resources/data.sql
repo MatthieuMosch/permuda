@@ -20,9 +20,9 @@ values ('Jan', 'Jan', 'Permudez', 'j.permudez@permuda.pm', 'Founder'),
 insert into achievements(title, owner_name)
 values ('ladder', 'Sjaak');
 
--- default profile-achievement assignments
-insert into profiles_achievements(profile_id, title)
-values (2, 'ladder');
+-- default achievement-profile assignments
+insert into achievements_profiles(title, profile_id)
+values ('ladder', 2);
 
 -- default rooms
 insert into rooms(description, owner_name)

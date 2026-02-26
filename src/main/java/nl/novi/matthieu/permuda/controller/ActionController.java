@@ -7,10 +7,7 @@ import nl.novi.matthieu.permuda.util.UriUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
@@ -29,5 +26,11 @@ public class ActionController {
         ActionOutputDto actionOutputDto = this.actionService.addAction(actionInputDto, userDetails.getUsername());
         URI uri = UriUtils.createUri(String.valueOf(actionOutputDto.id));
         return ResponseEntity.created(uri).body(actionOutputDto);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteAction(@PathVariable long id) {
+        this.actionService.deleteAction(id);
+        return ResponseEntity.noContent().build();
     }
 }

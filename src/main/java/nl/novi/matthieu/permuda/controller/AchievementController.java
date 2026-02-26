@@ -7,10 +7,7 @@ import nl.novi.matthieu.permuda.util.UriUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
@@ -32,5 +29,11 @@ public class AchievementController {
                 userDetails.getUsername());
         URI uri = UriUtils.createUri(achievementOutputDto.title);
         return ResponseEntity.created(uri).body(achievementOutputDto);
+    }
+
+    @DeleteMapping("/{title}")
+    public ResponseEntity<Void> deleteAchievement(@PathVariable String title) {
+        this.achievementService.deleteAchievement(title);
+        return ResponseEntity.noContent().build();
     }
 }

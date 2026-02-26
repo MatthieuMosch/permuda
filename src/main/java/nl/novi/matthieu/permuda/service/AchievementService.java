@@ -1,5 +1,6 @@
 package nl.novi.matthieu.permuda.service;
 
+import jakarta.transaction.Transactional;
 import nl.novi.matthieu.permuda.dto.achievement.AchievementInputDto;
 import nl.novi.matthieu.permuda.dto.achievement.AchievementOutputDto;
 import nl.novi.matthieu.permuda.mapper.AchievementMapper;
@@ -11,6 +12,7 @@ import nl.novi.matthieu.permuda.util.UserUtils;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 public class AchievementService {
 
     private final AchievementRepository achievementRepository;
@@ -30,5 +32,10 @@ public class AchievementService {
         achievement.setOwner(UserUtils.createOwnerProfile(this.userRepository,this.profileRepository,username));
         this.achievementRepository.save(achievement);
         return AchievementMapper.toOutputDto(achievement);
+    }
+
+    public  void deleteAchievement(String title) {
+        // TODO : check if title exists
+        this.achievementRepository.deleteByTitle(title);
     }
 }

@@ -21,7 +21,7 @@ public class Room {
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     private Set<Creature> creatures;
 
-    @OneToMany(mappedBy = "room")
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     private Set<Action> actions;
 
     @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL)

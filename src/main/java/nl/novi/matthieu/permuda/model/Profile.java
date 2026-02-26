@@ -12,7 +12,7 @@ public class Profile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "username", referencedColumnName = "username")
     private User user;
 
@@ -26,12 +26,7 @@ public class Profile {
     @JoinColumn(name = "room_id", referencedColumnName = "id")
     private Room room;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "profiles_achievements",
-            joinColumns = @JoinColumn(name = "profile_id"),
-            inverseJoinColumns = @JoinColumn(name = "title")
-    )
+    @ManyToMany(mappedBy = "profiles", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Achievement> achievements;
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

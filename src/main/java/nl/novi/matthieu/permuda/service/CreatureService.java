@@ -37,4 +37,8 @@ public class CreatureService {
         this.creatureRepository.save(creature);
         return CreatureMapper.toOutputDto(creature);
     }
+
+    public void deleteCreature(long id) {
+        this.creatureRepository.deleteById(id);
+    }
 }

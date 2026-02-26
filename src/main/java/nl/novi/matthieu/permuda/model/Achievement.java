@@ -10,13 +10,20 @@ public class Achievement {
     @Id
     private String title;
 
-    @ManyToMany(mappedBy = "achievements", fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "achievements_profiles",
+            joinColumns = @JoinColumn(name = "title"),
+            inverseJoinColumns = @JoinColumn(name = "profile_id")
+    )
     private Set<Profile> profiles;
 
-    @OneToMany(mappedBy = "requirement", fetch = FetchType.LAZY)
+    //, fetch = FetchType.LAZY
+    @OneToMany(mappedBy = "requirement", cascade = CascadeType.ALL)
     private Set<Action> requirements;
 
-    @OneToMany(mappedBy = "reward", fetch = FetchType.LAZY)
+    //, fetch = FetchType.LAZY
+    @OneToMany(mappedBy = "reward", cascade = CascadeType.ALL)
     private Set<Action> rewards;
 
     @ManyToOne

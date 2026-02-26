@@ -39,4 +39,8 @@ public class ActionService {
         this.actionRepository.save(action);
         return ActionMapper.toOutputDto(action);
     }
+
+    public void deleteAction(long id) {
+        this.actionRepository.deleteById(id);
+    }
 }
