@@ -5,6 +5,12 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "actions")
 public class Action {
+
+    // TODO : check cascade results for the room where the action is in and the room which is the destination
+    // the room can have more than 1 action, the action can only have 1 destination
+    // when an action is removed then the destination can be removed or not ?
+    // when an action is removed than the containing room does not have to be removed
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

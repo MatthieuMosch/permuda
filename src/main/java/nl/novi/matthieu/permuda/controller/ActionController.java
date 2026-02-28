@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/actions")
@@ -26,6 +27,11 @@ public class ActionController {
         ActionOutputDto actionOutputDto = this.actionService.addAction(actionInputDto, userDetails.getUsername());
         URI uri = UriUtils.createUri(String.valueOf(actionOutputDto.id));
         return ResponseEntity.created(uri).body(actionOutputDto);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ActionOutputDto>> getAllActions(){
+        return  ResponseEntity.ok(this.actionService.getAllActions());
     }
 
     @DeleteMapping("/{id}")

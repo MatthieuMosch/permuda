@@ -8,6 +8,8 @@ import nl.novi.matthieu.permuda.repository.*;
 import nl.novi.matthieu.permuda.util.UserUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ActionService {
 
@@ -30,6 +32,7 @@ public class ActionService {
     }
 
     public ActionOutputDto addAction(ActionInputDto actionInputDto, String username) {
+        // TODO : check if destination exists, otherwise throw an exception
         Action action = ActionMapper.toEntity(actionInputDto);
         action.setRoom(this.roomRepository.findRoomById(actionInputDto.room_id));
         action.setRequirement(this.achievementRepository.findAchievementByTitle(actionInputDto.requirement_title));
@@ -38,6 +41,11 @@ public class ActionService {
         action.setOwner(UserUtils.createOwnerProfile(this.userRepository,this.profileRepository,username));
         this.actionRepository.save(action);
         return ActionMapper.toOutputDto(action);
+    }
+
+    public List<ActionOutputDto> getAllActions() {
+        List<Action> actions = this.actionRepository.findAll();
+        return actions.stream().map(ActionMapper::toOutputDto).toList();
     }
 
     public void deleteAction(long id) {

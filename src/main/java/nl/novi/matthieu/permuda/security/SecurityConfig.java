@@ -59,15 +59,19 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/roles").permitAll()
                         .requestMatchers(HttpMethod.POST, "/users").permitAll()
                         .requestMatchers(HttpMethod.POST, "/profiles").authenticated()
+                        // GOD sees all
                         .requestMatchers(HttpMethod.GET,
                                 "/users",
                                 "/profiles",
+                                "/achievements",
+                                "/actions",
+                                "/creatures",
                                 "/rooms").hasRole("GOD")
-                        .requestMatchers(HttpMethod.GET,
-                                "/users/*",
-                                "/profiles/*").authenticated()
+                        // everyone can see 1 part
                         // mud use per single entry by everyone who is logged in: PLAYER or WIZARD or GOD
                         .requestMatchers(HttpMethod.GET,
+                                "/users/*",
+                                "/profiles/*",
                                 "/achievements/*",
                                 "/actions/*",
                                 "/creatures/*",

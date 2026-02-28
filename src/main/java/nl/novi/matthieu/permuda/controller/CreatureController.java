@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/creatures")
@@ -26,6 +27,11 @@ public class CreatureController {
         CreatureOutputDto creatureOutputDto = this.creatureService.addCreature(creatureInputDto, userDetails.getUsername());
         URI uri = UriUtils.createUri(String.valueOf(creatureOutputDto.id));
         return ResponseEntity.created(uri).body(creatureOutputDto);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<CreatureOutputDto>> getAllCreatures() {
+        return  ResponseEntity.ok(this.creatureService.getAllCreatures());
     }
 
     @DeleteMapping("/{id}")

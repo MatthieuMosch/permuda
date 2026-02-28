@@ -11,6 +11,8 @@ import nl.novi.matthieu.permuda.repository.UserRepository;
 import nl.novi.matthieu.permuda.util.UserUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class AchievementService {
@@ -32,6 +34,11 @@ public class AchievementService {
         achievement.setOwner(UserUtils.createOwnerProfile(this.userRepository,this.profileRepository,username));
         this.achievementRepository.save(achievement);
         return AchievementMapper.toOutputDto(achievement);
+    }
+
+    public List<AchievementOutputDto> getAllAchievements() {
+        List<Achievement> achievements = this.achievementRepository.findAll();
+        return achievements.stream().map(AchievementMapper::toOutputDto).toList();
     }
 
     public  void deleteAchievement(String title) {

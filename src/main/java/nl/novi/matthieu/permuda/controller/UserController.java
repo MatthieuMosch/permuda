@@ -21,14 +21,14 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserService service;
+    private final UserService userService;
 
-    public UserController(UserService service) {this.service = service;}
+    public UserController(UserService userService) {this.userService = userService;}
 
     // add a new user
     @PostMapping
     public ResponseEntity<UserOutputDto> addUser(@Valid @RequestBody UserInputDto userInputDto) {
-        UserOutputDto userOutputDto = this.service.addUser(userInputDto);
+        UserOutputDto userOutputDto = this.userService.addUser(userInputDto);
         URI uri = UriUtils.createUri(userOutputDto.username);
         return ResponseEntity.created(uri).body(userOutputDto);
     }
@@ -50,20 +50,20 @@ public class UserController {
 //                    "Nao e possivel listar as parcelas porque nao foi encontrado o contrato para o numero de contrato e cliente informado",
 //                    HttpStatus.NOT_FOUND.toString(), "External - Veiculos API");
 //        }
-        return ResponseEntity.ok(this.service.getAllUsers());
+        return ResponseEntity.ok(this.userService.getAllUsers());
     }
 
     // get 1 user
     @GetMapping("/{username}")
     public ResponseEntity<UserOutputDto> getUserById(@PathVariable String username) {
-        return ResponseEntity.ok(this.service.getUserByUsername(username));
+        return ResponseEntity.ok(this.userService.getUserByUsername(username));
     }
 
 //    // delete 1 user
     @DeleteMapping("/{username}")
     // TODO : test when a role is deleted, then the user should be deleted as well (cascade)
     public ResponseEntity<Void> deleteUserById(@PathVariable String username) {
-        this.service.deleteUserById(username);
+        this.userService.deleteUserById(username);
         return ResponseEntity.noContent().build();
     }
 }

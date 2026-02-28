@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/achievements")
@@ -17,7 +18,8 @@ public class AchievementController {
 
     private final AchievementService achievementService;
 
-    public AchievementController(AchievementService achievementService) {this.achievementService = achievementService;}
+    public AchievementController(AchievementService achievementService) {
+        this.achievementService = achievementService;}
 
     // add a new achievement
     @PostMapping
@@ -29,6 +31,11 @@ public class AchievementController {
                 userDetails.getUsername());
         URI uri = UriUtils.createUri(achievementOutputDto.title);
         return ResponseEntity.created(uri).body(achievementOutputDto);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<AchievementOutputDto>> getAllAchievements() {
+        return  ResponseEntity.ok(this.achievementService.getAllAchievements());
     }
 
     @DeleteMapping("/{title}")

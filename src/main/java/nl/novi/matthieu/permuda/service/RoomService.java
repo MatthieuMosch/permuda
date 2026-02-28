@@ -35,11 +35,6 @@ public class RoomService {
         return RoomMapper.toOutputDto(room);
     }
 
-    public void deleteRoom(long id) {
-        // TODO : check if id exists
-        this.roomRepository.deleteById(id);
-    }
-
     public List<RoomOutputDto> getAllRooms() {
         // TODO : only GOD can get it all
         List<Room> rooms = this.roomRepository.findAll();
@@ -50,5 +45,10 @@ public class RoomService {
         // TODO : test this with non-numeric requestparam
         Room room = this.roomRepository.findRoomById(Long.parseLong(id));
         return RoomMapper.toOutputDto(room);
+    }
+
+    public void deleteRoom(long id) {
+        // TODO : check if id exists
+        this.roomRepository.deleteById(id);
     }
 }

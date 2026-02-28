@@ -11,6 +11,9 @@ import nl.novi.matthieu.permuda.repository.UserRepository;
 import nl.novi.matthieu.permuda.util.UserUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class CreatureService {
 
@@ -36,6 +39,11 @@ public class CreatureService {
         creature.setOwner(UserUtils.createOwnerProfile(this.userRepository,this.profileRepository,username));
         this.creatureRepository.save(creature);
         return CreatureMapper.toOutputDto(creature);
+    }
+
+    public List<CreatureOutputDto> getAllCreatures(){
+        List<Creature> creatures = this.creatureRepository.findAll();
+        return creatures.stream().map(CreatureMapper::toOutputDto).toList();
     }
 
     public void deleteCreature(long id) {

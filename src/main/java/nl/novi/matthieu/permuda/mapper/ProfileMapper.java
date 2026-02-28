@@ -25,6 +25,7 @@ public class ProfileMapper {
         profileOutputDto.email = profile.getEmail();
         profileOutputDto.picture = profile.getPicture();
         profileOutputDto.bio = profile.getBio();
+        // TODO : return a list of room_id, not the rooms itself
         profileOutputDto.rooms = profile.getOwnedRooms();
         return profileOutputDto;
     }
