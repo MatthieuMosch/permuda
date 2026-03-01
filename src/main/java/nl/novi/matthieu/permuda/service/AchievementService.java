@@ -41,6 +41,11 @@ public class AchievementService {
         return achievements.stream().map(AchievementMapper::toOutputDto).toList();
     }
 
+    public  AchievementOutputDto getAchievementById(String title) {
+        Achievement achievement = this.achievementRepository.findAchievementByTitle(title);
+        return AchievementMapper.toOutputDto(achievement);
+    }
+
     public  void deleteAchievement(String title) {
         // TODO : check if title exists
         this.achievementRepository.deleteByTitle(title);

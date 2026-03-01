@@ -34,6 +34,11 @@ public class ActionController {
         return  ResponseEntity.ok(this.actionService.getAllActions());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ActionOutputDto> getActionById(@PathVariable long id){
+        return ResponseEntity.ok(this.actionService.getActionById(id));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAction(@PathVariable long id) {
         this.actionService.deleteAction(id);

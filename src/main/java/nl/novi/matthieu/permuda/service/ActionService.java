@@ -48,6 +48,11 @@ public class ActionService {
         return actions.stream().map(ActionMapper::toOutputDto).toList();
     }
 
+    public  ActionOutputDto getActionById(long id){
+        Action action = this.actionRepository.findActionById(id);
+        return ActionMapper.toOutputDto(action);
+    }
+
     public void deleteAction(long id) {
         this.actionRepository.deleteById(id);
     }

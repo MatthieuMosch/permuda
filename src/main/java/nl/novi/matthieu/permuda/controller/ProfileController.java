@@ -29,4 +29,10 @@ public class ProfileController {
     public ResponseEntity<List<ProfileOutputDto>> getAllProfiles() {
         return  ResponseEntity.ok(this.service.getAllProfiles());
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProfileOutputDto> getProfileById(@PathVariable long id) {
+        ProfileOutputDto profileOutputDto = this.service.getProfileById(id);
+        return ResponseEntity.ok(profileOutputDto);
+    }
 }

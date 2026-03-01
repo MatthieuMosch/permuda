@@ -22,6 +22,11 @@ public class ProfileService {
         return ProfileMapper.toDto(profile);
     }
 
+    public ProfileOutputDto getProfileById(long id) {
+        Profile profile = this.profileRepository.findProfileById(id);
+        return ProfileMapper.toDto(profile);
+    }
+
     public List<ProfileOutputDto> getAllProfiles() {
         List<Profile> profiles = this.profileRepository.findAll();
         return profiles.stream().map(ProfileMapper::toDto).toList();

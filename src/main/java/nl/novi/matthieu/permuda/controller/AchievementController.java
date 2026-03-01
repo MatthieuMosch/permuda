@@ -38,6 +38,11 @@ public class AchievementController {
         return  ResponseEntity.ok(this.achievementService.getAllAchievements());
     }
 
+    @GetMapping("/{title}")
+    public ResponseEntity<AchievementOutputDto> getAchievement(@PathVariable String title) {
+        return ResponseEntity.ok(this.achievementService.getAchievementById(title));
+    }
+
     @DeleteMapping("/{title}")
     public ResponseEntity<Void> deleteAchievement(@PathVariable String title) {
         this.achievementService.deleteAchievement(title);

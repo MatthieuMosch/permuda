@@ -34,6 +34,11 @@ public class CreatureController {
         return  ResponseEntity.ok(this.creatureService.getAllCreatures());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<CreatureOutputDto> getCreatureById(@PathVariable long id) {
+        return  ResponseEntity.ok(this.creatureService.getCreatureById(id));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCreature(@PathVariable long id) {
         this.creatureService.deleteCreature(id);

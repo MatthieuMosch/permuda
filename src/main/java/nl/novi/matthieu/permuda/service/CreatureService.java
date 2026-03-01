@@ -46,6 +46,11 @@ public class CreatureService {
         return creatures.stream().map(CreatureMapper::toOutputDto).toList();
     }
 
+    public CreatureOutputDto getCreatureById(long id){
+        Creature creature = this.creatureRepository.findCreatureById(id);
+        return CreatureMapper.toOutputDto(creature);
+    }
+
     public void deleteCreature(long id) {
         this.creatureRepository.deleteById(id);
     }
