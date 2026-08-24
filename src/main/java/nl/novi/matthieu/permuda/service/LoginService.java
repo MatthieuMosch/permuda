@@ -1,6 +1,6 @@
 package nl.novi.matthieu.permuda.service;
 
-import nl.novi.matthieu.permuda.dto.User.LoginDto;
+import nl.novi.matthieu.permuda.dto.user.LoginDto;
 import nl.novi.matthieu.permuda.security.JwtService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

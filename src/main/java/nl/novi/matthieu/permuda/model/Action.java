@@ -5,6 +5,12 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "actions")
 public class Action {
+
+    // TODO : check cascade results for the room where the action is in and the room which is the destination
+    // the room can have more than 1 action, the action can only have 1 destination
+    // when an action is removed then the destination can not be removed because it might be reached via another route
+    // when an action is removed then the containing room does not have to be removed
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -17,21 +23,41 @@ public class Action {
     private String command;
 
     @ManyToOne
-    @JoinColumn(name = "requirement", referencedColumnName = "title")
+    @JoinColumn(name = "requirement_title", referencedColumnName = "title")
     private Achievement requirement;
 
     private String succes;
     private String fail;
 
     @ManyToOne
-    @JoinColumn(name = "reward", referencedColumnName = "title")
+    @JoinColumn(name = "reward_title", referencedColumnName = "title")
     private Achievement reward;
 
     @ManyToOne
-    @JoinColumn(name = "destination", referencedColumnName = "id")
+    @JoinColumn(name = "destination_id", referencedColumnName = "id")
     private Room destination;
 
     @ManyToOne
-    @JoinColumn(name = "owner", referencedColumnName = "username")
+    @JoinColumn(name = "owner_name", referencedColumnName = "username")
     private Profile owner;
+
+    public long getId() {return this.id;}
+    public Room getRoom() {return this.room;}
+    public String getCommand() {return this.command;}
+    public Achievement getRequirement() {return this.requirement;}
+    public String getSucces() {return this.succes;}
+    public String getFail() {return this.fail;}
+    public Achievement getReward() {return this.reward;}
+    public Room getDestination() {return this.destination;}
+    public Profile getOwner() {return this.owner;}
+
+    public void setId(long id) {this.id = id;}
+    public void setRoom(Room room) {this.room = room;}
+    public void setCommand(String command) {this.command = command;}
+    public void setRequirement(Achievement requirement) {this.requirement = requirement;}
+    public void setSucces(String succes) {this.succes = succes;}
+    public void setFail(String fail) {this.fail = fail;}
+    public void setReward(Achievement reward) {this.reward = reward;}
+    public void setDestination(Room destination) {this.destination = destination;}
+    public void setOwner(Profile owner) {this.owner = owner;}
 }

@@ -1,18 +1,13 @@
 package nl.novi.matthieu.permuda.mapper;
 
-import nl.novi.matthieu.permuda.dto.User.ProfileInputDto;
-import nl.novi.matthieu.permuda.dto.User.ProfileOutputDto;
+import nl.novi.matthieu.permuda.dto.user.ProfileInputDto;
+import nl.novi.matthieu.permuda.dto.user.ProfileOutputDto;
 import nl.novi.matthieu.permuda.model.Profile;
-import nl.novi.matthieu.permuda.model.Room;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class ProfileMapper {
 
     public static Profile toEntity(ProfileInputDto profileInputDto) {
         Profile profile = new Profile();
-        profile.setId(profileInputDto.userId);
         profile.setFirstname(profileInputDto.firstname);
         profile.setLastname(profileInputDto.lastname);
         profile.setEmail(profileInputDto.email);
@@ -30,6 +25,7 @@ public class ProfileMapper {
         profileOutputDto.email = profile.getEmail();
         profileOutputDto.picture = profile.getPicture();
         profileOutputDto.bio = profile.getBio();
+        // TODO : return a list of room_id, not the rooms itself
         profileOutputDto.rooms = profile.getOwnedRooms();
         return profileOutputDto;
     }

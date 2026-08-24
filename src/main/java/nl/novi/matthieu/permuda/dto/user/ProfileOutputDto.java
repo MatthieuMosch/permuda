@@ -1,4 +1,4 @@
-package nl.novi.matthieu.permuda.dto.User;
+package nl.novi.matthieu.permuda.dto.user;
 
 import nl.novi.matthieu.permuda.model.Room;
 
@@ -16,5 +16,6 @@ public class ProfileOutputDto {
     public String picture;
     public String bio;
 
+    // TODO : return a list of all room_id, not the room itself
     public Set<Room> rooms;
 }

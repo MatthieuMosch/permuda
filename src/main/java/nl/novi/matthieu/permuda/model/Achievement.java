@@ -7,30 +7,40 @@ import java.util.Set;
 @Entity
 @Table(name = "achievements")
 public class Achievement {
-    // TODO : check all @Id : this includes nullable=false and unique=true already
     @Id
     private String title;
 
-    @ManyToMany(mappedBy = "achievements")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "achievements_profiles",
+            joinColumns = @JoinColumn(name = "title"),
+            inverseJoinColumns = @JoinColumn(name = "profile_id")
+    )
     private Set<Profile> profiles;
 
+    //, fetch = FetchType.LAZY
     @OneToMany(mappedBy = "requirement", cascade = CascadeType.ALL)
     private Set<Action> requirements;
 
+    //, fetch = FetchType.LAZY
     @OneToMany(mappedBy = "reward", cascade = CascadeType.ALL)
     private Set<Action> rewards;
 
     @ManyToOne
-    @JoinColumn(name = "owner", referencedColumnName = "username")
+    @JoinColumn(name = "owner_name", referencedColumnName = "username")
     private Profile owner;
 
     // getters
     public String getTitle() {return this.title;}
-    public void setProfiles(Set<Profile> profiles) {this.profiles = profiles;}
+    public Set<Profile> getProfiles() {return this.profiles;}
+    public Set<Action> getRequirements() {return this.requirements;}
+    public Set<Action> getRewards() {return this.rewards;}
+    public Profile getOwner() {return this.owner;}
 
     // setters
     public void setTitle(String title) {this.title = title;}
-    public Set<Profile> getProfiles() {return this.profiles;}
-
-
+    public void setProfiles(Set<Profile> profiles) {this.profiles = profiles;}
+    public void setRequirements(Set<Action> requirements) {this.requirements = requirements;}
+    public void setRewards(Set<Action> rewards) {this.rewards = rewards;}
+    public void setOwner(Profile owner) {this.owner = owner;}
 }

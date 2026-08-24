@@ -13,7 +13,7 @@ public class Profile {
     private long id;
 
     @OneToOne
-    @JoinColumn(name = "username")
+    @JoinColumn(name = "username", referencedColumnName = "username")
     private User user;
 
     private String firstname;
@@ -26,29 +26,21 @@ public class Profile {
     @JoinColumn(name = "room_id", referencedColumnName = "id")
     private Room room;
 
-    @ManyToMany
-    @JoinTable(
-            name = "profiles_achievements",
-            joinColumns = @JoinColumn(name = "profile_id"),
-            inverseJoinColumns = @JoinColumn(name = "title")
-    )
+    @ManyToMany(mappedBy = "profiles", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Achievement> achievements;
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
-    private Set<Achievement> ownedAchievements;
-
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Room> ownedRooms;
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Action> ownedActions;
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Achievement> ownedAchievements;
+
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Creature> ownedCreatures;
 
-    // TODO : add current room the profile/player is in
-
-    // TODO : use this. in all getters and setters
     // getters
     public Long getId() {return this.id;}
     public User getUser() {return this.user;}
@@ -56,17 +48,28 @@ public class Profile {
     public String getFirstname() {return this.firstname;}
     public String getLastname() {return this.lastname;}
     public String getEmail() {return this.email;}
-    public String getPicture() {return this.picture;}
     public String getBio() {return this.bio;}
+    public String getPicture() {return this.picture;}
+    public Room getRoom() {return this.room;}
+    public Set<Achievement> getAchievements() {return this.achievements;}
     public Set<Room> getOwnedRooms() {return this.ownedRooms;}
+    public Set<Action> getOwnedActions() {return this.ownedActions;}
+    public Set<Achievement> getOwnedAchievements() {return this.ownedAchievements;}
+    public Set<Creature> getOwnedCreatures() {return this.ownedCreatures;}
+
 
     // setters
-    public void setId(Long userId) {this.id = userId;}
+    public void setId(long id) {this.id = id;}
     public void setUser(User user) {this.user = user;}
     public void setFirstname(String firstname) {this.firstname = firstname;}
     public void setLastname(String lastname) {this.lastname = lastname;}
     public void setEmail(String email) {this.email = email;}
-    public void setPicture(String picture) {this.picture = picture;}
     public void setBio(String bio) {this.bio = bio;}
-    public void setOwnedAchievements(Set<Room> rooms) {this.ownedRooms = rooms;}
+    public void setPicture(String picture) {this.picture = picture;}
+    public void setRoom(Room room) {this.room = room;}
+    public void setAchievements(Set<Achievement> achievements) {this.achievements = achievements;}
+    public void setOwnedRooms(Set<Room> ownedRooms) {this.ownedRooms = ownedRooms;}
+    public void setOwnedActions(Set<Action> ownedActions) {this.ownedActions = ownedActions;}
+    public void setOwnedAchievements(Set<Achievement> ownedAchievements) {this.ownedAchievements = ownedAchievements;}
+    public void setOwnedCreatures(Set<Creature> ownedCreatures) {this.ownedCreatures = ownedCreatures;}
 }

@@ -1,11 +1,11 @@
-package nl.novi.matthieu.permuda.dto.User;
+package nl.novi.matthieu.permuda.dto.user;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 
 public class ProfileInputDto {
     @NotNull
-    public Long userId;
+    public String username;
 
     public String firstname;
     public String lastname;

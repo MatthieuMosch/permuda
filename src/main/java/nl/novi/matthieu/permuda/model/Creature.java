@@ -17,7 +17,7 @@ public class Creature {
     private Room room;
 
     @ManyToOne
-    @JoinColumn(name = "owner", referencedColumnName = "username")
+    @JoinColumn(name = "owner_name", referencedColumnName = "username")
     private Profile owner;
 
     // getters

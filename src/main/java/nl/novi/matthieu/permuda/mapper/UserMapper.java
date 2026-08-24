@@ -1,7 +1,7 @@
 package nl.novi.matthieu.permuda.mapper;
 
-import nl.novi.matthieu.permuda.dto.User.UserInputDto;
-import nl.novi.matthieu.permuda.dto.User.UserOutputDto;
+import nl.novi.matthieu.permuda.dto.user.UserInputDto;
+import nl.novi.matthieu.permuda.dto.user.UserOutputDto;
 import nl.novi.matthieu.permuda.model.User;
 
 public class UserMapper {
@@ -10,8 +10,6 @@ public class UserMapper {
         User user = new User();
         user.setUsername(userInputDto.username);
         // password and role are added in the user service
-        // TODO : move the password encoding inside this mapper
-//        user.setPassword(passwordEncoder.encode(userInputDto.password));
         return user;
     }
 
