@@ -28,7 +28,12 @@ public class ProfileService {
     }
 
     public List<ProfileOutputDto> getAllProfiles() {
+    // TODO : only GOD can see it all
         List<Profile> profiles = this.profileRepository.findAll();
         return profiles.stream().map(ProfileMapper::toDto).toList();
+    }
+
+    public void deleteProfileById(long id) {
+        this.profileRepository.deleteProfileById(id);
     }
 }

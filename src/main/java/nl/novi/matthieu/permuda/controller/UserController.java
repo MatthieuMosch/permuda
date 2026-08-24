@@ -61,8 +61,9 @@ public class UserController {
 
 //    // delete 1 user
     @DeleteMapping("/{username}")
-    // TODO : test when a role is deleted, then the user should be deleted as well (cascade)
-    public ResponseEntity<Void> deleteUserById(@PathVariable String username) {
+    // TODO : throw exception when the current user wants to delete anotehr user
+    // TODO : GOD can erase anyone from existence
+    public ResponseEntity<Void> deleteUserByUsername(@PathVariable String username) {
         this.userService.deleteUserById(username);
         return ResponseEntity.noContent().build();
     }

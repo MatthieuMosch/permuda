@@ -10,8 +10,6 @@ public class UserMapper {
         User user = new User();
         user.setUsername(userInputDto.username);
         // password and role are added in the user service
-        // TODO : move the password encoding inside this mapper
-//        user.setPassword(passwordEncoder.encode(userInputDto.password));
         return user;
     }
 

@@ -32,7 +32,6 @@ public class ActionService {
     }
 
     public ActionOutputDto addAction(ActionInputDto actionInputDto, String username) {
-        // TODO : check if destination exists, otherwise throw an exception
         Action action = ActionMapper.toEntity(actionInputDto);
         action.setRoom(this.roomRepository.findRoomById(actionInputDto.room_id));
         action.setRequirement(this.achievementRepository.findAchievementByTitle(actionInputDto.requirement_title));

@@ -14,25 +14,31 @@ import java.util.List;
 @RequestMapping("/profiles")
 public class ProfileController {
 
-    private final ProfileService service;
+    private final ProfileService profileService;
 
-    public ProfileController(ProfileService profileService) {service = profileService;}
+    public ProfileController(ProfileService profileService) {this.profileService = profileService;}
 
     @PostMapping
     public ResponseEntity<ProfileOutputDto> addProfile(@RequestBody ProfileInputDto profileInputDto) {
-        ProfileOutputDto profileOutputDto = this.service.addProfile(profileInputDto);
+        ProfileOutputDto profileOutputDto = this.profileService.addProfile(profileInputDto);
         URI uri = UriUtils.createUri(profileOutputDto.username);
         return ResponseEntity.created(uri).body(profileOutputDto);
     }
 
     @GetMapping
     public ResponseEntity<List<ProfileOutputDto>> getAllProfiles() {
-        return  ResponseEntity.ok(this.service.getAllProfiles());
+        return  ResponseEntity.ok(this.profileService.getAllProfiles());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ProfileOutputDto> getProfileById(@PathVariable long id) {
-        ProfileOutputDto profileOutputDto = this.service.getProfileById(id);
+        ProfileOutputDto profileOutputDto = this.profileService.getProfileById(id);
         return ResponseEntity.ok(profileOutputDto);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProfileById(@PathVariable long id) {
+        this.profileService.deleteProfileById(id);
+        return ResponseEntity.noContent().build();
     }
 }

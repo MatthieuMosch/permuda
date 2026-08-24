@@ -24,7 +24,6 @@ public class LoginController {
     @PostMapping
     public ResponseEntity<String> login(@Valid @RequestBody LoginDto loginDto) {
         // TODO : test exceptions
-        // TODO : return UserOutputDto in body of responseEntity
         try {
             String jwt = loginService.login(loginDto);
             return ResponseEntity.ok()
