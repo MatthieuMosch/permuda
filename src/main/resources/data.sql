@@ -17,40 +17,40 @@ values ('Jan', 'Jan', 'Permudez', 'j.permudez@permuda.pm', 'Founder'),
        ('Robin', 'Robin', 'Kruis', 'r.kruis@permuda.pm', 'Wanderer');
 
 -- default achievements
-insert into achievements(title, owner_name)
-values ('ladder', 'Sjaak');
+insert into achievements(title, owner_id)
+values ('ladder', 2);
 
 -- default achievement-profile assignments
 insert into achievements_profiles(title, profile_id)
 values ('ladder', 2);
 
 -- default rooms
-insert into rooms(description, owner_name)
-values ('A deserted beach', 'Jan'),
-       ('The west end of the beach', 'Sjaak'),
-       ('The east end of the beach', 'Sjaak'),
-       ('A forest', 'Sjaak'),
-       ('A house in the tree', 'Sjaak');
+insert into rooms(description, owner_id)
+values ('A deserted beach', 1),
+       ('The west end of the beach', 2),
+       ('The east end of the beach', 2),
+       ('A forest', 2),
+       ('A house in the tree', 2);
 
 -- default standard exits
-insert into actions(room_id, command, destination_id, owner_name)
-values (1, 'west', 2, 'Jan'),
-       (1, 'east', 3, 'Jan'),
-       (1, 'north', 4, 'Jan'),
-       (2, 'east', 1, 'Sjaak'),
-       (3, 'west', 1, 'Sjaak'),
-       (4, 'south', 1, 'Sjaak');
+insert into actions(room_id, command, destination_id, owner_id)
+values (1, 'west', 2, 1),
+       (1, 'east', 3, 1),
+       (1, 'north', 4, 1),
+       (2, 'east', 1, 2),
+       (3, 'west', 1, 2),
+       (4, 'south', 1, 2);
 
 -- default special actions
-insert into actions(room_id, command, requirement_title, succes, fail, destination_id, owner_name)
-values (3, 'up', 'ladder', 'You used the ladder to climb up.', 'You have no ladder.', 4, 'Sjaak'),
-       (4, 'down', 'ladder', 'You used the ladder to climb down', 'You have no ladder.', 3, 'Sjaak');
+insert into actions(room_id, command, requirement_title, succes, fail, destination_id, owner_id)
+values (3, 'up', 'ladder', 'You used the ladder to climb up.', 'You have no ladder.', 4, 2),
+       (4, 'down', 'ladder', 'You used the ladder to climb down', 'You have no ladder.', 3, 2);
 
 -- default rewarded actions
-insert into actions(room_id, command, succes, fail, reward_title, owner_name)
-values (3, 'make ladder', 'You made a ladder.', 'You have no materials', 'ladder', 'Sjaak');
+insert into actions(room_id, command, succes, fail, reward_title, owner_id)
+values (3, 'make ladder', 'You made a ladder.', 'You have no materials', 'ladder', 2);
 
 -- default creatures
-insert into creatures(room_id, description, owner_name)
-values (3, 'A squirrel', 'Sjaak'),
-       (4, 'A mouse', 'Sjaak');
+insert into creatures(room_id, description, owner_id)
+values (3, 'A squirrel', 2),
+       (4, 'A mouse', 2);

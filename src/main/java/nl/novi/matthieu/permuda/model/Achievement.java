@@ -27,7 +27,7 @@ public class Achievement {
     private Set<Action> rewards;
 
     @ManyToOne
-    @JoinColumn(name = "owner_name", referencedColumnName = "username")
+    @JoinColumn(name = "owner_id") //, referencedColumnName = "username")
     private Profile owner;
 
     // getters

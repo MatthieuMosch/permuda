@@ -7,8 +7,13 @@ import jakarta.persistence.*;
 public class User {
 
     @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private long id;
     @Column(length = 50)
     private String username;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Profile profile;
 
     @ManyToOne
     @JoinColumn(name = "rolename", referencedColumnName = "rolename")
@@ -17,8 +22,8 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private Profile profile;
+//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+//    private Profile profile;
 
     // getters
     public String getUsername() {return this.username;}

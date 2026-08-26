@@ -29,7 +29,7 @@ public class Room {
     private Set<Action> origins;
 
     @ManyToOne
-    @JoinColumn(name = "owner_name", referencedColumnName = "username")
+    @JoinColumn(name = "owner_id") //, referencedColumnName = "user_id")
     private Profile owner;
 
     // getters

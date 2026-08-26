@@ -2,7 +2,7 @@ package nl.novi.matthieu.permuda.mapper;
 
 import nl.novi.matthieu.permuda.dto.user.ProfileInputDto;
 import nl.novi.matthieu.permuda.dto.user.ProfileOutputDto;
-import nl.novi.matthieu.permuda.model.Profile;
+import nl.novi.matthieu.permuda.model.*;
 
 public class ProfileMapper {
 
@@ -25,8 +25,10 @@ public class ProfileMapper {
         profileOutputDto.email = profile.getEmail();
         profileOutputDto.picture = profile.getPicture();
         profileOutputDto.bio = profile.getBio();
-        // TODO : return a list of room_id, not the rooms itself
-        profileOutputDto.rooms = profile.getOwnedRooms();
+        profileOutputDto.room_ids = profile.getOwnedRooms().stream().map(Room::getId).toList();
+        profileOutputDto.action_ids = profile.getOwnedActions().stream().map(Action::getId).toList();
+        profileOutputDto.achievement_titles = profile.getOwnedAchievements().stream().map(Achievement::getTitle).toList();
+        profileOutputDto.creature_ids = profile.getOwnedCreatures().stream().map(Creature::getId).toList();
         return profileOutputDto;
     }
 }

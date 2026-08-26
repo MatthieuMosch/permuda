@@ -84,6 +84,8 @@ public class SecurityConfig {
                                 "/rooms").hasAnyRole("GOD","WIZARD")
                         // deletion
                         .requestMatchers(HttpMethod.DELETE,
+                                "/users/*",
+                                "/profiles/*",
                                 "/achievements/*",
                                 "/actions/*",
                                 "/creatures/*",

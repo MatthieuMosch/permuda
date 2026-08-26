@@ -1,7 +1,9 @@
 package nl.novi.matthieu.permuda.dto.user;
 
+import nl.novi.matthieu.permuda.model.Achievement;
 import nl.novi.matthieu.permuda.model.Room;
 
+import java.util.List;
 import java.util.Set;
 
 public class ProfileOutputDto {
@@ -16,6 +18,9 @@ public class ProfileOutputDto {
     public String picture;
     public String bio;
 
-    // TODO : return a list of all room_id, not the room itself
-    public Set<Room> rooms;
+    //owned by profile
+    public List<Long> room_ids;
+    public List<Long> action_ids;
+    public List<String> achievement_titles;
+    public List<Long> creature_ids;
 }
