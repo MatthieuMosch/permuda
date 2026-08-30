@@ -2,7 +2,11 @@ package nl.novi.matthieu.permuda.mapper;
 
 import nl.novi.matthieu.permuda.dto.user.ProfileInputDto;
 import nl.novi.matthieu.permuda.dto.user.ProfileOutputDto;
-import nl.novi.matthieu.permuda.model.*;
+import nl.novi.matthieu.permuda.model.Achievement;
+import nl.novi.matthieu.permuda.model.Action;
+import nl.novi.matthieu.permuda.model.Profile;
+import nl.novi.matthieu.permuda.model.Room;
+import nl.novi.matthieu.permuda.model.Creature;
 
 public class ProfileMapper {
 

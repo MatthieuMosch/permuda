@@ -7,8 +7,6 @@ import nl.novi.matthieu.permuda.model.Creature;
 import nl.novi.matthieu.permuda.model.Profile;
 import nl.novi.matthieu.permuda.model.Room;
 
-import java.util.List;
-
 public class RoomMapper {
 
     public static Room toEntity(RoomInputDto roomInputDto) {

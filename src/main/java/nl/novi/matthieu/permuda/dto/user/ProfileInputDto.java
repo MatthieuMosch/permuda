@@ -4,8 +4,9 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 
 public class ProfileInputDto {
-    @NotNull
-    public String username;
+    // TODO : retreive username from logged in user and not from the inputdto
+//    @NotNull
+//    public String username;
 
     public String firstname;
     public String lastname;

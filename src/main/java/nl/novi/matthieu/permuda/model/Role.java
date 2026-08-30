@@ -2,6 +2,7 @@ package nl.novi.matthieu.permuda.model;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -12,7 +13,7 @@ public class Role {
     private String rolename;
 
     @OneToMany(mappedBy = "role", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<User> users;
+    private Set<User> users = new HashSet<>();
 
     // getters
     public String getRolename() {return this.rolename;}

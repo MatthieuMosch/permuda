@@ -5,6 +5,8 @@ import nl.novi.matthieu.permuda.dto.user.ProfileOutputDto;
 import nl.novi.matthieu.permuda.service.ProfileService;
 import nl.novi.matthieu.permuda.util.UriUtils;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -19,8 +21,11 @@ public class ProfileController {
     public ProfileController(ProfileService profileService) {this.profileService = profileService;}
 
     @PostMapping
-    public ResponseEntity<ProfileOutputDto> addProfile(@RequestBody ProfileInputDto profileInputDto) {
-        ProfileOutputDto profileOutputDto = this.profileService.addProfile(profileInputDto);
+    public ResponseEntity<ProfileOutputDto> addProfile(
+            @RequestBody ProfileInputDto profileInputDto,
+            @AuthenticationPrincipal UserDetails userDetails) {
+        // TODO : a profile can only be added for the current user
+        ProfileOutputDto profileOutputDto = this.profileService.addProfile(profileInputDto, userDetails.getUsername());
         URI uri = UriUtils.createUri(profileOutputDto.username);
         return ResponseEntity.created(uri).body(profileOutputDto);
     }

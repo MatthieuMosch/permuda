@@ -1,7 +1,8 @@
 package nl.novi.matthieu.permuda.model;
 
-
 import jakarta.persistence.*;
+
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -15,10 +16,6 @@ public class Profile {
     @OneToOne
     @JoinColumn(name = "username")
     private User user;
-
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user_id", nullable = false)
-//    private User user;
 
     private String firstname;
     private String lastname;
@@ -34,16 +31,16 @@ public class Profile {
     private Set<Achievement> achievements;
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Room> ownedRooms;
+    private Set<Room> ownedRooms = new HashSet<>();
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Action> ownedActions;
+    private Set<Action> ownedActions = new HashSet<>();
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Achievement> ownedAchievements;
+    private Set<Achievement> ownedAchievements = new HashSet<>();
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Creature> ownedCreatures;
+    private Set<Creature> ownedCreatures = new HashSet<>();
 
     // getters
     public Long getId() {return this.id;}
@@ -65,6 +62,7 @@ public class Profile {
     // setters
     public void setId(long id) {this.id = id;}
     public void setUser(User user) {this.user = user;}
+    public void setUsername(String username) {this.firstname = username;}
     public void setFirstname(String firstname) {this.firstname = firstname;}
     public void setLastname(String lastname) {this.lastname = lastname;}
     public void setEmail(String email) {this.email = email;}

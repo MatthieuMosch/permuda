@@ -1,10 +1,6 @@
 package nl.novi.matthieu.permuda.dto.user;
 
-import nl.novi.matthieu.permuda.model.Achievement;
-import nl.novi.matthieu.permuda.model.Room;
-
 import java.util.List;
-import java.util.Set;
 
 public class ProfileOutputDto {
     public Long userId;
