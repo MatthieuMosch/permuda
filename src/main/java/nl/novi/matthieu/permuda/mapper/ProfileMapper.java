@@ -2,7 +2,11 @@ package nl.novi.matthieu.permuda.mapper;
 
 import nl.novi.matthieu.permuda.dto.user.ProfileInputDto;
 import nl.novi.matthieu.permuda.dto.user.ProfileOutputDto;
+import nl.novi.matthieu.permuda.model.Achievement;
+import nl.novi.matthieu.permuda.model.Action;
 import nl.novi.matthieu.permuda.model.Profile;
+import nl.novi.matthieu.permuda.model.Room;
+import nl.novi.matthieu.permuda.model.Creature;
 
 public class ProfileMapper {
 
@@ -11,7 +15,6 @@ public class ProfileMapper {
         profile.setFirstname(profileInputDto.firstname);
         profile.setLastname(profileInputDto.lastname);
         profile.setEmail(profileInputDto.email);
-        profile.setPicture(profileInputDto.picture);
         profile.setBio(profileInputDto.bio);
         return profile;
     }
@@ -23,10 +26,13 @@ public class ProfileMapper {
         profileOutputDto.firstname = profile.getFirstname();
         profileOutputDto.lastname = profile.getLastname();
         profileOutputDto.email = profile.getEmail();
-        profileOutputDto.picture = profile.getPicture();
         profileOutputDto.bio = profile.getBio();
-        // TODO : return a list of room_id, not the rooms itself
-        profileOutputDto.rooms = profile.getOwnedRooms();
+        profileOutputDto.avatarFile = profile.getAvatarFile();
+//        profileOutputDto.avatar = profile.getAvatar();
+        profileOutputDto.room_ids = profile.getOwnedRooms().stream().map(Room::getId).toList();
+        profileOutputDto.action_ids = profile.getOwnedActions().stream().map(Action::getId).toList();
+        profileOutputDto.achievement_titles = profile.getOwnedAchievements().stream().map(Achievement::getTitle).toList();
+        profileOutputDto.creature_ids = profile.getOwnedCreatures().stream().map(Creature::getId).toList();
         return profileOutputDto;
     }
 }

@@ -42,15 +42,15 @@ public class RoomService {
         return RoomMapper.toOutputDto(room);
     }
 
-    public RoomOutputDto addAction(long id, ActionInputDto actionInputDto, String username) {
-        Room room = roomRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Room with id " + id + " does not exist"));
-        Action action = ActionMapper.toEntity(actionInputDto);
-        action.setRoom(room);
-        action.setOwner(UserUtils.createOwnerProfile(this.userRepository,this.profileRepository,username));
-        this.actionRepository.save(action);
-        return RoomMapper.toOutputDto(room);
-    }
+//    public RoomOutputDto addAction(long id, ActionInputDto actionInputDto, String username) {
+//        Room room = roomRepository.findById(id)
+//                .orElseThrow(() -> new ResourceNotFoundException("Room with id " + id + " does not exist"));
+//        Action action = ActionMapper.toEntity(actionInputDto);
+//        action.setRoom(room);
+//        action.setOwner(UserUtils.createOwnerProfile(this.userRepository,this.profileRepository,username));
+//        this.actionRepository.save(action);
+//        return RoomMapper.toOutputDto(room);
+//    }
 
     public List<RoomOutputDto> getAllRooms() {
         // TODO : only GOD can get it all

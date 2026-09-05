@@ -9,5 +9,7 @@ import java.util.Optional;
 public interface ProfileRepository extends JpaRepository<Profile, String> {
     Optional<Profile> findByUser(User user);
     Profile findProfileById(long id);
+//    Profile findProfileByUsernameIgnoreCase(String username);
     void deleteProfileById(long id);
+
 }

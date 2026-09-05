@@ -2,6 +2,7 @@ package nl.novi.matthieu.permuda.model;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -17,19 +18,19 @@ public class Room {
     private String description;
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
-    private Set<Profile> profiles;
+    private Set<Profile> profiles = new HashSet<>();
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
-    private Set<Creature> creatures;
+    private Set<Creature> creatures = new HashSet<>();
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
-    private Set<Action> actions;
+    private Set<Action> actions = new HashSet<>();
 
     @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL)
-    private Set<Action> origins;
+    private Set<Action> origins = new HashSet<>();
 
     @ManyToOne
-    @JoinColumn(name = "owner_name", referencedColumnName = "username")
+    @JoinColumn(name = "owner_id") //, referencedColumnName = "user_id")
     private Profile owner;
 
     // getters

@@ -2,6 +2,7 @@ package nl.novi.matthieu.permuda.model;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -16,18 +17,18 @@ public class Achievement {
             joinColumns = @JoinColumn(name = "title"),
             inverseJoinColumns = @JoinColumn(name = "profile_id")
     )
-    private Set<Profile> profiles;
+    private Set<Profile> profiles = new HashSet<>();
 
     //, fetch = FetchType.LAZY
     @OneToMany(mappedBy = "requirement", cascade = CascadeType.ALL)
-    private Set<Action> requirements;
+    private Set<Action> requirements = new HashSet<>();
 
     //, fetch = FetchType.LAZY
     @OneToMany(mappedBy = "reward", cascade = CascadeType.ALL)
-    private Set<Action> rewards;
+    private Set<Action> rewards = new HashSet<>();
 
     @ManyToOne
-    @JoinColumn(name = "owner_name", referencedColumnName = "username")
+    @JoinColumn(name = "owner_id") //, referencedColumnName = "username")
     private Profile owner;
 
     // getters

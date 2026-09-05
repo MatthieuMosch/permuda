@@ -46,29 +46,6 @@ public class RoomController {
         return ResponseEntity.ok(this.roomService.getRoomById(id));
     }
 
-    // add a new action to a room
-    // TODO : throw exception when action already exists
-    @PatchMapping("/{id}/addAction")
-    public ResponseEntity<RoomOutputDto> addActionToRoom(
-            @PathVariable long id,
-            @RequestBody ActionInputDto actionInputDto,
-            @AuthenticationPrincipal UserDetails userDetails) {
-        RoomOutputDto roomOutputDto = this.roomService.addAction(id, actionInputDto, userDetails.getUsername());
-        return ResponseEntity.ok(roomOutputDto);
-    }
-
-    // assign an existing action to a room
-    // TODO : throw exception when actionid does not exist
-    @PatchMapping("/{id}/assignAction")
-    public ResponseEntity<RoomOutputDto> assignAction(
-            @PathVariable long id,
-            @RequestParam long actionId,
-            @AuthenticationPrincipal UserDetails userDetails) {
-        ActionInputDto actionInputDto = actionService.getActionById(actionId);
-        RoomOutputDto roomOutputDto = this.roomService.addAction(id, actionInputDto, userDetails.getUsername());
-        return ResponseEntity.ok(roomOutputDto);
-    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteRoom(@PathVariable long id) {
         this.roomService.deleteRoom(id);

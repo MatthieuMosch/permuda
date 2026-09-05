@@ -1,8 +1,6 @@
 package nl.novi.matthieu.permuda.dto.user;
 
-import nl.novi.matthieu.permuda.model.Room;
-
-import java.util.Set;
+import java.util.List;
 
 public class ProfileOutputDto {
     public Long userId;
@@ -13,9 +11,19 @@ public class ProfileOutputDto {
 
     public String email;
 
-    public String picture;
     public String bio;
 
-    // TODO : return a list of all room_id, not the room itself
-    public Set<Room> rooms;
+    //avatar filename
+    public String avatarFile;
+
+    //avatar picture file bytes does not have to be shown in the profileOutputDto
+    //this can be retreived via its specific endpoint
+//    public byte[] avatar;
+
+    //owned by profile
+    public List<Long> room_ids;
+    public List<Long> action_ids;
+    public List<String> achievement_titles;
+    public List<Long> creature_ids;
+
 }

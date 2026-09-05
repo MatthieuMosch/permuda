@@ -84,12 +84,17 @@ public class SecurityConfig {
                                 "/rooms").hasAnyRole("GOD","WIZARD")
                         // deletion
                         .requestMatchers(HttpMethod.DELETE,
+                                "/users/*",
+                                "/profiles/*",
                                 "/achievements/*",
                                 "/actions/*",
                                 "/creatures/*",
                                 "/rooms/*").hasAnyRole("GOD","WIZARD")
                         // deny any other unresolved request
-                        .anyRequest().denyAll());
+                        .anyRequest().permitAll());
+        // TODO : remove the line above, this is just for testing during development
+        // TODO : activate the line below for real security
+//                        .anyRequest().denyAll());
         return http.build();
     }
 }

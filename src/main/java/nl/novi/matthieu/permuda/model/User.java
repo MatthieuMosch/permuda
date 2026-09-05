@@ -10,15 +10,15 @@ public class User {
     @Column(length = 50)
     private String username;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Profile profile;
+
     @ManyToOne
     @JoinColumn(name = "rolename", referencedColumnName = "rolename")
     private Role role;
 
     @Column(nullable = false)
     private String password;
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private Profile profile;
 
     // getters
     public String getUsername() {return this.username;}
