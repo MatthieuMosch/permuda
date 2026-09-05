@@ -15,7 +15,6 @@ public class ProfileMapper {
         profile.setFirstname(profileInputDto.firstname);
         profile.setLastname(profileInputDto.lastname);
         profile.setEmail(profileInputDto.email);
-        profile.setPicture(profileInputDto.picture);
         profile.setBio(profileInputDto.bio);
         return profile;
     }
@@ -27,8 +26,9 @@ public class ProfileMapper {
         profileOutputDto.firstname = profile.getFirstname();
         profileOutputDto.lastname = profile.getLastname();
         profileOutputDto.email = profile.getEmail();
-        profileOutputDto.picture = profile.getPicture();
         profileOutputDto.bio = profile.getBio();
+        profileOutputDto.avatarFile = profile.getAvatarFile();
+//        profileOutputDto.avatar = profile.getAvatar();
         profileOutputDto.room_ids = profile.getOwnedRooms().stream().map(Room::getId).toList();
         profileOutputDto.action_ids = profile.getOwnedActions().stream().map(Action::getId).toList();
         profileOutputDto.achievement_titles = profile.getOwnedAchievements().stream().map(Achievement::getTitle).toList();

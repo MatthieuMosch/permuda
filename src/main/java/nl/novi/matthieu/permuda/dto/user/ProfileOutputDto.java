@@ -11,12 +11,19 @@ public class ProfileOutputDto {
 
     public String email;
 
-    public String picture;
     public String bio;
+
+    //avatar filename
+    public String avatarFile;
+
+    //avatar picture file bytes does not have to be shown in the profileOutputDto
+    //this can be retreived via its specific endpoint
+//    public byte[] avatar;
 
     //owned by profile
     public List<Long> room_ids;
     public List<Long> action_ids;
     public List<String> achievement_titles;
     public List<Long> creature_ids;
+
 }

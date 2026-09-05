@@ -14,6 +14,6 @@ public class ProfileInputDto {
     @Email(message = "enter a valid email address like name@domain")
     public String email;
 
-    public String picture;
+//    public String picture;
     public String bio;
 }

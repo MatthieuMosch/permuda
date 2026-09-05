@@ -21,7 +21,14 @@ public class Profile {
     private String lastname;
     private String email;
     private String bio;
-    private String picture;
+
+    //avatar filename
+    private String avatarFile;
+
+    //store avatar file bytes in database
+    @Lob
+    @Column(name = "avatar")
+    private byte[] avatar;
 
     @ManyToOne
     @JoinColumn(name = "room_id", referencedColumnName = "id")
@@ -50,7 +57,8 @@ public class Profile {
     public String getLastname() {return this.lastname;}
     public String getEmail() {return this.email;}
     public String getBio() {return this.bio;}
-    public String getPicture() {return this.picture;}
+    public String getAvatarFile() {return avatarFile;}
+    public byte[] getAvatar() {return this.avatar;}
     public Room getRoom() {return this.room;}
     public Set<Achievement> getAchievements() {return this.achievements;}
     public Set<Room> getOwnedRooms() {return this.ownedRooms;}
@@ -67,7 +75,8 @@ public class Profile {
     public void setLastname(String lastname) {this.lastname = lastname;}
     public void setEmail(String email) {this.email = email;}
     public void setBio(String bio) {this.bio = bio;}
-    public void setPicture(String picture) {this.picture = picture;}
+    public void setAvatarFile(String avatarFile) {this.avatarFile = avatarFile;}
+    public void setAvatar(byte[] avatar) {this.avatar = avatar;}
     public void setRoom(Room room) {this.room = room;}
     public void setAchievements(Set<Achievement> achievements) {this.achievements = achievements;}
     public void setOwnedRooms(Set<Room> ownedRooms) {this.ownedRooms = ownedRooms;}
@@ -75,3 +84,4 @@ public class Profile {
     public void setOwnedAchievements(Set<Achievement> ownedAchievements) {this.ownedAchievements = ownedAchievements;}
     public void setOwnedCreatures(Set<Creature> ownedCreatures) {this.ownedCreatures = ownedCreatures;}
 }
+

@@ -1,7 +1,9 @@
 package nl.novi.matthieu.permuda.service;
 
+import jakarta.transaction.Transactional;
 import nl.novi.matthieu.permuda.dto.user.ProfileInputDto;
 import nl.novi.matthieu.permuda.dto.user.ProfileOutputDto;
+import nl.novi.matthieu.permuda.exception.FileStorageException;
 import nl.novi.matthieu.permuda.exception.GlobalExceptionHandler;
 import nl.novi.matthieu.permuda.exception.ResourceNotFoundException;
 import nl.novi.matthieu.permuda.mapper.ProfileMapper;
@@ -9,7 +11,11 @@ import nl.novi.matthieu.permuda.model.Profile;
 import nl.novi.matthieu.permuda.model.User;
 import nl.novi.matthieu.permuda.repository.ProfileRepository;
 import nl.novi.matthieu.permuda.repository.UserRepository;
+import org.antlr.v4.runtime.misc.Pair;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -28,15 +34,34 @@ public class ProfileService {
 
     public ProfileOutputDto addProfile(ProfileInputDto profileInputDto, String username) {
         Profile profile = ProfileMapper.toEntity(profileInputDto);
-        // TODO : user profile create for new users
-        // TODO : check if user or profile already exists
-        // TODO : outputdto has problems when a part is null, then the property cant be read
         User user = userRepository.findByUsernameIgnoreCase(username).
                 orElseThrow(() -> new ResourceNotFoundException("User with " + username + " does not exist"));
         profile.setUser(user);
-//        profile.setUsername(username);
         this.profileRepository.save(profile);
         return ProfileMapper.toDto(profile);
+    }
+
+    public ProfileOutputDto uploadAvatar(MultipartFile avatarFile, Long id) {
+//        Profile profile = this.profileRepository.findProfileByUsernameIgnoreCase(username);
+        Profile profile= this.profileRepository.findProfileById(id);
+        try {
+            profile.setAvatarFile(avatarFile.getOriginalFilename());
+            profile.setAvatar(avatarFile.getBytes());
+            this.profileRepository.save(profile);
+            return ProfileMapper.toDto(profile);
+        } catch (Exception e) {
+            throw new FileStorageException(
+                    "Could not add avatar with file " + avatarFile.getOriginalFilename(), e);
+        }
+    }
+
+    @Transactional
+//    public Resource downloadAvatar(long id) {
+    public byte[] downloadAvatar(long id) {
+        Profile profile = this.profileRepository.findProfileById(id);
+//        Resource resource = new ByteArrayResource(profile.getAvatarFile().getBytes());
+//        return  resource;
+        return profile.getAvatar();
     }
 
     public ProfileOutputDto getProfileById(long id) {
