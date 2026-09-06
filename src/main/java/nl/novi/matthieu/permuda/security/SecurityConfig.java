@@ -55,20 +55,14 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // login
                         .requestMatchers(HttpMethod.POST, "/login").permitAll()
-                        // users and profiles
                         .requestMatchers(HttpMethod.GET, "/roles").permitAll()
+                        // users and profiles
                         .requestMatchers(HttpMethod.POST, "/users").permitAll()
                         .requestMatchers(HttpMethod.POST, "/profiles").authenticated()
-                        // GOD sees all
-                        .requestMatchers(HttpMethod.GET,
-                                "/users",
-                                "/profiles",
-                                "/achievements",
-                                "/actions",
-                                "/creatures",
-                                "/rooms").hasRole("GOD")
-                        // everyone can see 1 part
-                        // mud use per single entry by everyone who is logged in: PLAYER or WIZARD or GOD
+                        .requestMatchers(HttpMethod.PATCH, "/profiles/**").permitAll() //.authenticated()
+                        // GOD is almighty
+                        .requestMatchers("/**").hasRole("GOD")
+                        // everyone who is authenticated can view the mud entities
                         .requestMatchers(HttpMethod.GET,
                                 "/users/*",
                                 "/profiles/*",
@@ -76,25 +70,22 @@ public class SecurityConfig {
                                 "/actions/*",
                                 "/creatures/*",
                                 "/rooms/*").authenticated()
-                        // mud creation
+                        // mud creation can only be done by a WIZARD (and the almighty GOD)
                         .requestMatchers(HttpMethod.POST,
                                 "/achievements",
                                 "/actions",
                                 "/creatures",
-                                "/rooms").hasAnyRole("GOD","WIZARD")
-                        // deletion
+                                "/rooms").hasRole("WIZARD")
+                        // deletion can only be done by a WIZARD (and the almighty GOD)
                         .requestMatchers(HttpMethod.DELETE,
                                 "/users/*",
                                 "/profiles/*",
                                 "/achievements/*",
                                 "/actions/*",
                                 "/creatures/*",
-                                "/rooms/*").hasAnyRole("GOD","WIZARD")
+                                "/rooms/*").hasRole("WIZARD")
                         // deny any other unresolved request
-                        .anyRequest().permitAll());
-        // TODO : remove the line above, this is just for testing during development
-        // TODO : activate the line below for real security
-//                        .anyRequest().denyAll());
+                        .anyRequest().denyAll());
         return http.build();
     }
 }

@@ -1,12 +1,8 @@
 package nl.novi.matthieu.permuda.service;
 
-import nl.novi.matthieu.permuda.dto.action.ActionInputDto;
 import nl.novi.matthieu.permuda.dto.room.RoomInputDto;
 import nl.novi.matthieu.permuda.dto.room.RoomOutputDto;
-import nl.novi.matthieu.permuda.exception.ResourceNotFoundException;
-import nl.novi.matthieu.permuda.mapper.ActionMapper;
 import nl.novi.matthieu.permuda.mapper.RoomMapper;
-import nl.novi.matthieu.permuda.model.Action;
 import nl.novi.matthieu.permuda.model.Room;
 import nl.novi.matthieu.permuda.repository.ActionRepository;
 import nl.novi.matthieu.permuda.repository.ProfileRepository;
@@ -42,18 +38,7 @@ public class RoomService {
         return RoomMapper.toOutputDto(room);
     }
 
-//    public RoomOutputDto addAction(long id, ActionInputDto actionInputDto, String username) {
-//        Room room = roomRepository.findById(id)
-//                .orElseThrow(() -> new ResourceNotFoundException("Room with id " + id + " does not exist"));
-//        Action action = ActionMapper.toEntity(actionInputDto);
-//        action.setRoom(room);
-//        action.setOwner(UserUtils.createOwnerProfile(this.userRepository,this.profileRepository,username));
-//        this.actionRepository.save(action);
-//        return RoomMapper.toOutputDto(room);
-//    }
-
     public List<RoomOutputDto> getAllRooms() {
-        // TODO : only GOD can get it all
         List<Room> rooms = this.roomRepository.findAll();
         return rooms.stream().map(RoomMapper::toOutputDto).toList();
     }
@@ -64,7 +49,6 @@ public class RoomService {
     }
 
     public void deleteRoom(long id) {
-        // TODO : check if id exists
         this.roomRepository.deleteById(id);
     }
 }

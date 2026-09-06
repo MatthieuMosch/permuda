@@ -28,19 +28,9 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 
-    // TODO : catch delete or get on empty dataset
     @ExceptionHandler(EmptyResultDataAccessException.class)
     public ResponseEntity<String> handleEmptyResultDataAccess(EmptyResultDataAccessException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 
-
-    // TODO : catch non-unique exception (is now shown as 500 internal server error)
-
-    // TODO : catch invalid email exception (is now shown as 500 internal server error)
-
-    // TODO : catch empty list responses
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    @ExceptionHandler(EmptyListException.class)
-//    public void handleException() {}
 }

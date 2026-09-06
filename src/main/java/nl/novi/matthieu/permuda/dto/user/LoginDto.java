@@ -4,7 +4,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public class LoginDto {
-    // public properties as this is the login DTO which is public anyway
 
     @NotBlank(message = "Username is required")
     @Size(message = "Username should be at least 3 characters long", min = 3)

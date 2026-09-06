@@ -1,7 +1,5 @@
 package nl.novi.matthieu.permuda.controller;
 
-import nl.novi.matthieu.permuda.dto.action.ActionInputDto;
-import nl.novi.matthieu.permuda.dto.action.ActionOutputDto;
 import nl.novi.matthieu.permuda.dto.room.RoomInputDto;
 import nl.novi.matthieu.permuda.dto.room.RoomOutputDto;
 import nl.novi.matthieu.permuda.service.ActionService;

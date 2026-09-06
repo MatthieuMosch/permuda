@@ -29,9 +29,6 @@ public class UserService {
     }
 
     public UserOutputDto addUser(UserInputDto userInputDto) {
-        // TODO : check for existing user, ignore upper and lower case
-        // TODO : add exception when username is not unique
-        // TODO : only GOD can assign roles other than PLAYER
         User user = UserMapper.toEntity(userInputDto);
         user.setPassword(passwordEncoder.encode(userInputDto.password));
         // validate role input
@@ -55,7 +52,6 @@ public class UserService {
     }
 
     public void deleteUserById(String username) {
-        // TODO : test for exceptions when the username does not exist
         this.userRepository.deleteById(username);
     }
 }

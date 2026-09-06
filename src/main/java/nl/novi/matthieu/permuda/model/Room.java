@@ -3,7 +3,6 @@ package nl.novi.matthieu.permuda.model;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -30,7 +29,7 @@ public class Room {
     private Set<Action> origins = new HashSet<>();
 
     @ManyToOne
-    @JoinColumn(name = "owner_id") //, referencedColumnName = "user_id")
+    @JoinColumn(name = "owner_id")
     private Profile owner;
 
     // getters

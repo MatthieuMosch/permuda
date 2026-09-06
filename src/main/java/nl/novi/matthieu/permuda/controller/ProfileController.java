@@ -4,8 +4,6 @@ import nl.novi.matthieu.permuda.dto.user.ProfileInputDto;
 import nl.novi.matthieu.permuda.dto.user.ProfileOutputDto;
 import nl.novi.matthieu.permuda.service.ProfileService;
 import nl.novi.matthieu.permuda.util.UriUtils;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -64,11 +62,5 @@ public class ProfileController {
     public ResponseEntity<ProfileOutputDto> getProfileById(@PathVariable long id) {
         ProfileOutputDto profileOutputDto = this.profileService.getProfileById(id);
         return ResponseEntity.ok(profileOutputDto);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProfileById(@PathVariable long id) {
-        this.profileService.deleteProfileById(id);
-        return ResponseEntity.noContent().build();
     }
 }

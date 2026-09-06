@@ -13,11 +13,11 @@ public class Creature {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "room_id") //, referencedColumnName = "id")
+    @JoinColumn(name = "room_id")
     private Room room;
 
     @ManyToOne
-    @JoinColumn(name = "owner_id") //, referencedColumnName = "_id")
+    @JoinColumn(name = "owner_id")
     private Profile owner;
 
     // getters

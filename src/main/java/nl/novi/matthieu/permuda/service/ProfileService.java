@@ -11,9 +11,6 @@ import nl.novi.matthieu.permuda.model.Profile;
 import nl.novi.matthieu.permuda.model.User;
 import nl.novi.matthieu.permuda.repository.ProfileRepository;
 import nl.novi.matthieu.permuda.repository.UserRepository;
-import org.antlr.v4.runtime.misc.Pair;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,7 +23,9 @@ public class ProfileService {
     private final UserRepository userRepository;
     private final GlobalExceptionHandler globalExceptionHandler;
 
-    public ProfileService(ProfileRepository profileRepository, UserRepository userRepository, GlobalExceptionHandler globalExceptionHandler) {
+    public ProfileService(ProfileRepository profileRepository,
+                          UserRepository userRepository,
+                          GlobalExceptionHandler globalExceptionHandler) {
         this.profileRepository = profileRepository;
         this.userRepository = userRepository;
         this.globalExceptionHandler = globalExceptionHandler;
@@ -42,7 +41,6 @@ public class ProfileService {
     }
 
     public ProfileOutputDto uploadAvatar(MultipartFile avatarFile, Long id) {
-//        Profile profile = this.profileRepository.findProfileByUsernameIgnoreCase(username);
         Profile profile= this.profileRepository.findProfileById(id);
         try {
             profile.setAvatarFile(avatarFile.getOriginalFilename());
@@ -56,11 +54,8 @@ public class ProfileService {
     }
 
     @Transactional
-//    public Resource downloadAvatar(long id) {
     public byte[] downloadAvatar(long id) {
         Profile profile = this.profileRepository.findProfileById(id);
-//        Resource resource = new ByteArrayResource(profile.getAvatarFile().getBytes());
-//        return  resource;
         return profile.getAvatar();
     }
 
@@ -70,12 +65,8 @@ public class ProfileService {
     }
 
     public List<ProfileOutputDto> getAllProfiles() {
-    // TODO : only GOD can see it all
         List<Profile> profiles = this.profileRepository.findAll();
         return profiles.stream().map(ProfileMapper::toDto).toList();
     }
 
-    public void deleteProfileById(long id) {
-        this.profileRepository.deleteProfileById(id);
-    }
 }

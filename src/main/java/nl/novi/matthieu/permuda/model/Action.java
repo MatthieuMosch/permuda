@@ -6,11 +6,6 @@ import jakarta.persistence.*;
 @Table(name = "actions")
 public class Action {
 
-    // TODO : check cascade results for the room where the action is in and the room which is the destination
-    // the room can have more than 1 action, the action can only have 1 destination
-    // when an action is removed then the destination can not be removed because it might be reached via another route
-    // when an action is removed then the containing room does not have to be removed
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -38,7 +33,7 @@ public class Action {
     private Room destination;
 
     @ManyToOne
-    @JoinColumn(name = "owner_id") //, referencedColumnName = "username")
+    @JoinColumn(name = "owner_id")
     private Profile owner;
 
     public long getId() {return this.id;}
