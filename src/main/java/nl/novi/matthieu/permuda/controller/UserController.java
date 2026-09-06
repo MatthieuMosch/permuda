@@ -36,20 +36,6 @@ public class UserController {
     // get a list of all users
     @GetMapping
     public ResponseEntity<List<UserOutputDto>> getAllUsers() {
-        // TODO : return ResponseEntity<>(HttpStatus.NO_CONTENT) when the result is an empty array
-        // TODO : return status 204 (NoContent) without a body when there is no user (empty array)
-        // error 204 should not return [] but null ?
-//        try {
-//            List<Parcela> parcelasFiltradas = veiculosUsecase.filtrarParcelasPorStatus(documento, numeroContrato,
-//                    status);//        if (parcelasFiltradas.isEmpty()) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }
-//    catch (ParcelasNaoEncontradasException e) {
-//            throw new NotFoundException(
-//                    "Nao e possivel listar as parcelas porque nao foi encontrado o contrato para o numero de contrato e cliente informado",
-//                    "Nao e possivel listar as parcelas porque nao foi encontrado o contrato para o numero de contrato e cliente informado",
-//                    HttpStatus.NOT_FOUND.toString(), "External - Veiculos API");
-//        }
         return ResponseEntity.ok(this.userService.getAllUsers());
     }
 
@@ -59,10 +45,8 @@ public class UserController {
         return ResponseEntity.ok(this.userService.getUserByUsername(username));
     }
 
-//    // delete 1 user
+    // delete 1 user
     @DeleteMapping("/{username}")
-    // TODO : throw exception when the current user wants to delete anotehr user
-    // TODO : GOD can erase anyone from existence
     public ResponseEntity<Void> deleteUserByUsername(@PathVariable String username) {
         this.userService.deleteUserById(username);
         return ResponseEntity.noContent().build();

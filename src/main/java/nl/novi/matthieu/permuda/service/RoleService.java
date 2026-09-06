@@ -6,7 +6,6 @@ import nl.novi.matthieu.permuda.model.Role;
 import nl.novi.matthieu.permuda.repository.RoleRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

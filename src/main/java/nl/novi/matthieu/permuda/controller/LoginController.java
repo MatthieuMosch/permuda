@@ -23,7 +23,6 @@ public class LoginController {
 
     @PostMapping
     public ResponseEntity<String> login(@Valid @RequestBody LoginDto loginDto) {
-        // TODO : test exceptions
         try {
             String jwt = loginService.login(loginDto);
             return ResponseEntity.ok()

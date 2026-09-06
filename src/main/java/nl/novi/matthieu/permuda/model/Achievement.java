@@ -19,16 +19,14 @@ public class Achievement {
     )
     private Set<Profile> profiles = new HashSet<>();
 
-    //, fetch = FetchType.LAZY
     @OneToMany(mappedBy = "requirement", cascade = CascadeType.ALL)
     private Set<Action> requirements = new HashSet<>();
 
-    //, fetch = FetchType.LAZY
     @OneToMany(mappedBy = "reward", cascade = CascadeType.ALL)
     private Set<Action> rewards = new HashSet<>();
 
     @ManyToOne
-    @JoinColumn(name = "owner_id") //, referencedColumnName = "username")
+    @JoinColumn(name = "owner_id")
     private Profile owner;
 
     // getters

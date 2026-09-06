@@ -11,7 +11,6 @@ import nl.novi.matthieu.permuda.repository.UserRepository;
 import nl.novi.matthieu.permuda.util.UserUtils;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

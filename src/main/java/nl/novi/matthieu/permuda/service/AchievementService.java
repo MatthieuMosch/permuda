@@ -47,7 +47,6 @@ public class AchievementService {
     }
 
     public  void deleteAchievement(String title) {
-        // TODO : check if title exists
         this.achievementRepository.deleteByTitle(title);
     }
 }

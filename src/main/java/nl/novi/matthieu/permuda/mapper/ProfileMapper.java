@@ -21,14 +21,13 @@ public class ProfileMapper {
 
     public static ProfileOutputDto toDto(Profile profile) {
         ProfileOutputDto profileOutputDto = new ProfileOutputDto();
-        profileOutputDto.userId = profile.getId();
+        profileOutputDto.id = profile.getId();
         profileOutputDto.username = profile.getUsername();
         profileOutputDto.firstname = profile.getFirstname();
         profileOutputDto.lastname = profile.getLastname();
         profileOutputDto.email = profile.getEmail();
         profileOutputDto.bio = profile.getBio();
         profileOutputDto.avatarFile = profile.getAvatarFile();
-//        profileOutputDto.avatar = profile.getAvatar();
         profileOutputDto.room_ids = profile.getOwnedRooms().stream().map(Room::getId).toList();
         profileOutputDto.action_ids = profile.getOwnedActions().stream().map(Action::getId).toList();
         profileOutputDto.achievement_titles = profile.getOwnedAchievements().stream().map(Achievement::getTitle).toList();

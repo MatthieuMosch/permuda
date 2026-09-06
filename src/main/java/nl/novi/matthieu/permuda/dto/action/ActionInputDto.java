@@ -12,5 +12,5 @@ public class ActionInputDto {
     public String succes;
     public String fail;
     public String reward_title;
-    public Long destination_id; // Long instead of long so that it can be null
+    public Long destination_id;
 }
